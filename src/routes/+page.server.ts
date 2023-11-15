@@ -9,7 +9,7 @@ import { z } from 'zod';
 
 import OpenAI from 'openai';
 
-import { Buffer } from 'buffer'; // Import the Buffer module
+import { Buffer } from 'buffer';
 
 type AnalysisData = {
 	imageBase64: string;
@@ -45,7 +45,12 @@ async function analyzeImage({ imageBase64, description }: AnalysisData) {
 		]
 	});
 
-	console.log(response.choices[0].message.content);
+	const imageDescription = response.choices[0].message.content;
+
+	if (!imageDescription) {
+		throw new Error('No description returned please try again');
+	}
+
 	return response.choices[0].message.content;
 }
 
@@ -85,7 +90,8 @@ export const actions: Actions = {
 		}
 
 		if (!imageFile) return;
-		// GPT change - Convert the Blob to a Buffer and then to a base64 string
+
+		//  Convert the Blob to a Buffer and then to a base64 string
 		const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
 		const base64Image = imageBuffer.toString('base64');
 
@@ -101,6 +107,7 @@ export const actions: Actions = {
 			});
 		} catch (error) {
 			console.error('Error analyzing image:', error);
+
 			return message(
 				imageForm,
 				{
