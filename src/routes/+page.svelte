@@ -34,7 +34,9 @@
 		openAiResponse = '';
 	}
 
-	$: $form.description = `Create a captivating caption that highlights the key fashion elements in this image, emphasizing the style, color palette, and the mood it evokes. The caption should resonate with a fashion-forward audience and embody the essence of modern aesthetics.`;
+	// $: $form.description = `Create a captivating caption that highlights the key fashion elements in this image, emphasizing the style, color palette, and the mood it evokes. The caption should resonate with a fashion-forward audience and embody the essence of modern aesthetics.`;
+	
+	$: $form.description = `Please describe this image with a focus on the fashion and aesthetics`;
 </script>
 
 <main class="p-2 grid h-[100vh] place-content-center w-full">
