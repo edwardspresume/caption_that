@@ -34,8 +34,7 @@
 		openAiResponse = '';
 	}
 
-	$: $form.description =
-		'Please give a detailed description this image with a focus on the fashion and aesthetics';
+	$: $form.description = `Create a captivating caption that highlights the key fashion elements in this image, emphasizing the style, color palette, and the mood it evokes. The caption should resonate with a fashion-forward audience and embody the essence of modern aesthetics.`;
 </script>
 
 <main class="p-2 grid h-[100vh] place-content-center w-full">
@@ -44,7 +43,7 @@
 			<h1 class="text-2xl text-center mb-8">Image description generator</h1>
 
 			{#if $message && $message.alertType === 'error'}
-				<p class="text-center text-red-500 mb-5">{$message}</p>
+				<p class="text-center text-red-500 mb-5">{$message.alertMessage}</p>
 			{/if}
 
 			<form method="POST" use:enhance class="grid gap-9">
@@ -74,7 +73,7 @@
 					<span>Enter prompt</span>
 					<p class="text-red-500">{$errors.description ? $errors.description : ''}</p>
 					<textarea
-						rows="4"
+						rows="8"
 						class="textarea"
 						name="description"
 						placeholder="Describe the image focusing on fashion and aesthetics..."
