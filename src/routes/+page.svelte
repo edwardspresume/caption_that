@@ -35,11 +35,11 @@
 	}
 
 	// $: $form.description = `Create a captivating caption that highlights the key fashion elements in this image, emphasizing the style, color palette, and the mood it evokes. The caption should resonate with a fashion-forward audience and embody the essence of modern aesthetics.`;
-	
+
 	$: $form.description = `Please describe this image with a focus on the fashion and aesthetics`;
 </script>
 
-<main class="p-2 grid h-[100vh] place-content-center w-full">
+<main class="p-2 grid py-10 place-content-center w-full">
 	<div class="max-w-4xl flex flex-col md:flex-row gap-10">
 		<section class="flex-1">
 			<h1 class="text-2xl text-center mb-8">Image description generator</h1>
