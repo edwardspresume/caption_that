@@ -22,8 +22,14 @@ async function analyzeImage({ imageBase64, description }: AnalysisData) {
 	});
 
 	const response: OpenAI.Chat.ChatCompletion = await openai.chat.completions.create({
-		model: 'gpt-4-vision-preview', // Make sure to use the correct vision model name
+		model: 'gpt-4-vision-preview',
+		max_tokens: 2000,
+		temperature: 0.8,
 		messages: [
+			// {
+			// 	role: 'system',
+			// 	content: `Please give a long and detailed description of the image`
+			// },
 			{
 				role: 'user',
 				content: [
@@ -74,7 +80,7 @@ export const actions: Actions = {
 		if (!validationResult.success) {
 			return message(imageForm, {
 				alertType: 'error',
-				alertMessage: validationResult.error.issues
+				alertMessage: 'Please upload an image'
 			});
 		}
 
