@@ -112,7 +112,7 @@ export const actions: Actions = {
 				imageForm,
 				{
 					alertType: 'error',
-					alertMessage: 'Error analyzing image'
+					alertMessage: 'Error analyzing image please try again'
 				},
 				{
 					status: 500
