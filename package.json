@@ -45,6 +45,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@tabler/icons-svelte": "^2.40.0"
+    "@tabler/icons-svelte": "^2.40.0",
+    "openai": "^4.18.0"
   }
 }
