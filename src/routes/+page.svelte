@@ -92,7 +92,7 @@
 				/>
 			</label>
 
-			<button type="submit" class="btn variant-filled">
+			<button type="submit" class="btn variant-filled" disabled={$delayed}>
 				{#if $delayed}
 					<IconLoader2 class="animate-spin" />
 				{/if}
