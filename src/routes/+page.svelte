@@ -7,13 +7,13 @@
 
 	import { superForm } from 'sveltekit-superforms/client';
 
-	import { ImageSchema } from '$lib';
+	import { ImageDescriptionSchema } from '$lib';
 
 	export let data: PageData;
 
 	const { enhance, form, delayed, message, errors } = superForm(data.imageForm, {
 		resetForm: true,
-		validators: ImageSchema
+		validators: ImageDescriptionSchema
 	});
 
 	let uploadedFile;
@@ -26,7 +26,6 @@
 			uploadedFileUrl = URL.createObjectURL(uploadedFile);
 		}
 	}
-	$: console.log($errors);
 
 	$: $form.description = 'Please describe this image with a focus on the fashion and aesthetics';
 </script>
@@ -64,8 +63,10 @@
 				/>
 			</label>
 
-			<button type="button" class="btn variant-filled">
-				<IconLoader2 class="animate-spin" />
+			<button type="submit" class="btn variant-filled">
+				{#if $delayed}
+					<IconLoader2 class="animate-spin" />
+				{/if}
 
 				<span> Submit </span>
 			</button>
