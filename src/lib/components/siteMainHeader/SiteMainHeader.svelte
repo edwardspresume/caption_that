@@ -7,7 +7,11 @@
 
 <header class="relative border-b">
 	<div class="container flex items-center justify-between p-2">
-		<Button href={Routes.HOMEPAGE} variant="ghost" class="gap-1 font-bold sm:text-2xl">
+		<Button
+			href={Routes.HOMEPAGE}
+			variant="ghost"
+			class="gap-1 p-0 text-base font-bold sm:text-2xl"
+		>
 			<span class="rotate-180">✨</span>
 			<span>Image Caption Creator</span>
 			<span class="-scale-y-100">✨</span>
