@@ -29,6 +29,9 @@ dependencies:
   postcss-preset-env:
     specifier: ^9.3.0
     version: 9.3.0(postcss@8.4.31)
+  svelte-sonner:
+    specifier: ^0.3.6
+    version: 0.3.6(svelte@4.2.7)
   tailwind-merge:
     specifier: ^2.0.0
     version: 2.0.0
@@ -3738,6 +3741,14 @@ packages:
       svelte: 4.2.7
       typescript: 5.3.2
     dev: true
+
+  /svelte-sonner@0.3.6(svelte@4.2.7):
+    resolution: {integrity: sha512-MwVhh4nxCqTBLHYamRw+q9erZC2Y4wuL8mUa7phgq/9kq9VdTr+/6S1PX1CnALJPy2rkc7TlIECYTJavUkoWlg==}
+    peerDependencies:
+      svelte: '>=3 <5'
+    dependencies:
+      svelte: 4.2.7
+    dev: false
 
   /svelte@4.2.7:
     resolution: {integrity: sha512-UExR1KS7raTdycsUrKLtStayu4hpdV3VZQgM0akX8XbXgLBlosdE/Sf3crOgyh9xIjqSYB3UEBuUlIQKRQX2hg==}

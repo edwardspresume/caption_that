@@ -1,23 +1,37 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
+	import { Toaster, toast } from 'svelte-sonner';
 	import { superForm } from 'sveltekit-superforms/client';
 
 	import { CaptionPromptSchema, MAX_CAPTION_PROMPT_LENGTH } from '$validations/captionPromptSchema';
 
+	import StarredTitle from '$components/StarredTitle.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';
 	import TextArea from '$components/form/TextArea.svelte';
-	import StarredTitle from '$components/StarredTitle.svelte';
 
 	export let data: PageData;
 
-	let uploadedFileUrl: string | null = null;
+	let uploadedImageUrl: string | null = null;
+	let isImageUploadInProgress: boolean = false;
 
-	function handleFileUpload(event: Event) {
+	function handleImageUpload(event: Event) {
 		const input = event.target as HTMLInputElement;
 
-		if (input.files && input.files[0]) {
-			uploadedFileUrl = URL.createObjectURL(input.files[0]);
+		if (input.files?.[0]) {
+			const file = input.files[0];
+
+			isImageUploadInProgress = true;
+
+			try {
+				// Revoke the old URL if it exists
+				uploadedImageUrl && URL.revokeObjectURL(uploadedImageUrl);
+				uploadedImageUrl = URL.createObjectURL(file);
+			} catch (e) {
+				toast.error('Failed to upload image. Please try again.');
+			} finally {
+				isImageUploadInProgress = false;
+			}
 		}
 	}
 
@@ -26,6 +40,8 @@
 		validators: CaptionPromptSchema
 	});
 </script>
+
+<Toaster />
 
 <div class="container max-w-lg p-2">
 	<header class="text-center mb-7">
@@ -47,12 +63,14 @@
 				accept="image/*"
 				name="uploadedImage"
 				class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-				on:change={handleFileUpload}
+				on:change={handleImageUpload}
 			/>
 
-			{#if uploadedFileUrl}
+			{#if isImageUploadInProgress}
+				<iconify-icon icon="eos-icons:bubble-loading" class="text-5xl"></iconify-icon>
+			{:else if uploadedImageUrl}
 				<img
-					src={uploadedFileUrl}
+					src={uploadedImageUrl}
 					alt="Uploaded Preview"
 					class="object-cover border rounded border-foreground/10 max-h-28"
 				/>
