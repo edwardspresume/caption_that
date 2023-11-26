@@ -1,8 +1,11 @@
 <script lang="ts">
 	import type { HTMLTextareaAttributes } from 'svelte/elements';
 
-	import { cn } from '$lib/utils';
 	import type { EnterKeyHint } from '$lib/types';
+	import { cn } from '$lib/utils';
+
+	import Label from '$components/ui/label/label.svelte';
+	import Textarea from '$components/ui/textarea/textarea.svelte';
 
 	let className: HTMLTextareaAttributes['class'] = undefined;
 	export { className as class };
@@ -18,9 +21,7 @@
 	$: valueLength = value.length;
 </script>
 
-<label
-	class="grid gap-1 text-sm font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
->
+<Label class="grid gap-2">
 	<div>
 		<span>{label}</span>
 
@@ -35,9 +36,8 @@
 		<p class="text-red-500">{errorMessage}</p>
 	{/if}
 
-	<textarea
+	<Textarea
 		{name}
-		rows="5"
 		dir="auto"
 		bind:value
 		{maxlength}
@@ -45,8 +45,8 @@
 		{placeholder}
 		{enterkeyhint}
 		aria-label={label}
-		class={cn('bg-transparent border rounded-lg py-2 px-3 sm:py-4', className)}
+		class={cn(className)}
 		aria-invalid={errorMessage ? 'true' : undefined}
 		{...$$restProps}
 	/>
-</label>
+</Label>
