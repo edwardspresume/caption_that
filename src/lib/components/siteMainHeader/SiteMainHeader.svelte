@@ -1,13 +1,13 @@
 <script>
 	import { Routes } from '$lib/navLinks';
 
-	import SiteMainNav from './SiteMainNav.svelte';
+	import ThemeToggler from './ThemeToggler.svelte';
 </script>
 
 <header class="relative border-b">
 	<div class="container flex items-center justify-between p-2">
-		<a href={Routes.HOMEPAGE} class="text-2xl font-bold">✨ Image Caption Creator ✨</a>
+		<a href={Routes.HOMEPAGE} class="font-bold sm:text-2xl">✨ Image Caption Creator ✨</a>
 
-		<SiteMainNav />
+		<ThemeToggler />
 	</div>
 </header>
