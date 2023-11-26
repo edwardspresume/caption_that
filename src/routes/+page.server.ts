@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 
-import { CaptionPromptSchema } from '$lib/validations/captionPromptSchema';
+import { CaptionPromptSchema } from '$validations/captionPromptSchema';
 
 import { superValidate } from 'sveltekit-superforms/server';
 

@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const MAX_CAPTION_PROMPT_LENGTH = 300;
 
 export const CaptionPromptSchema = z.object({
-	description: z
+	prompt: z
 		.string()
 		.min(1, 'Prompt is required')
 		.max(
