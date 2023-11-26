@@ -1,38 +1,82 @@
-# create-svelte
+# SvelteKit Starter Template
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This starter template is designed for developers looking to jumpstart their [SvelteKit](https://kit.svelte.dev/) projects. It comes pre-configured with a suite of tools in aim to enforce best practices and ensure high-quality, maintainable code.
 
-## Creating a project
+## Getting Started
 
-If you're seeing this, you've probably already done this step. Congrats!
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+### Prerequisites
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+Ensure you have `pnpm` installed on your system for efficient package management. For installation instructions, visit the [official pnpm installation guide](https://pnpm.io/installation).
 
-## Developing
+### Installation
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To install the dependencies, run the following command:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm install
 ```
 
-## Building
+### Development
 
-To create a production version of your app:
+To start the development server, run:
 
 ```bash
-npm run build
+pnpm dev
 ```
 
-You can preview the production build with `npm run preview`.
+This will start the server and open the app in a new browser tab by visiting http://localhost:5173/. Changes in the code will automatically rebuild the app and refresh the page.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### Build
+
+To build the application for production, use:
+
+```bash
+pnpm build
+```
+
+## Features
+
+### Language and Typing
+
+- 📘 **[TypeScript](https://www.typescriptlang.org/)**: Static types for JavaScript.
+- 🔧 **[TS Reset](https://www.totaltypescript.com/ts-reset)**: Improved TypeScript type checking.
+
+### Styling and UI
+
+- 🎨 **[PostCSS Preset Env](https://www.npmjs.com/package/postcss-preset-env)**: Facilitates the use of modern CSS features.
+- 🧩 **[Shadcn-svelte](https://www.shadcn-svelte.com/)**: Accessible and customizable component library.
+- 💨 **[Tailwind CSS](https://tailwindcss.com/)**: Utility-first CSS framework for rapid UI development.
+- 🤝 **[Tailwind Merge](https://github.com/dcastil/tailwind-merge)** & **[clsx](https://github.com/lukeed/clsx)**: Allows you to merge classes together.
+
+### Icons and Progress Indicators
+
+- 🎨 **[Iconify](https://iconify.design/docs/iconify-icon/)**: Extensive SVG icons.
+- ⏳ **[Svelte Progress](https://www.npmjs.com/package/@bobbymannino/svelte-progress)**: Loading indicators components.
+
+### Code Quality and Testing
+
+- 🛠️ **[ESLint](https://eslint.org/)** & **✨ [Prettier](https://prettier.io/)**: Code quality tools.
+- 🧪 **Testing**: Unit tests with [Vitest](https://vitest.dev/), E2E tests with [Playwright](https://playwright.dev/).
+- 📜 **[JSDOM](https://github.com/jsdom/jsdom)**: Simulates the DOM for testing.
+
+### Plugins
+
+- **[@sveltejs/enhanced-img](https://www.npmjs.com/package/@sveltejs/enhanced-img)**: Experimental image optimization.
+
+## Additions to the default SvelteKit TSConfig
+
+- `noUnusedLocals`: Avoids unused variable declarations.
+- `moduleDetection`: Enhanced module detection.
+- `noUnusedParameters`: Checks for unused function parameters.
+- `verbatimModuleSyntax`: Preserves module syntax upon import.
+- `noUncheckedIndexedAccess`: Enforces checks on indexed access.
+- `types`: Includes Vitest's global type definitions.
+
+## Checklist
+
+When you use this template, try follow the checklist to update your info properly
+
+- [ ] Change the favicon in `static`
+- [ ] Add sitemap to `static`

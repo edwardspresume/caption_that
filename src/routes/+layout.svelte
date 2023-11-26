@@ -1,10 +1,15 @@
-<script lang="ts">
-	import { dev } from '$app/environment';
-	import { inject } from '@vercel/analytics';
+<script>
+	import '../app.pcss';
 
-	import '../app.postcss';
+	import { Bar } from '@bobbymannino/svelte-progress';
 
-	inject({ mode: dev ? 'development' : 'production' });
+	import SiteMainHeader from '$components/siteMainHeader/SiteMainHeader.svelte';
 </script>
 
-<slot />
+<Bar color="#6D28D9" size="big" speed="fast" />
+
+<SiteMainHeader />
+
+<main>
+	<slot />
+</main>
