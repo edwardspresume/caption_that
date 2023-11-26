@@ -4,6 +4,7 @@
 	import SubmitButton from '$components/form/SubmitButton.svelte';
 	import TextArea from '$components/form/TextArea.svelte';
 	import StarredTitle from '$components/StarredTitle.svelte';
+	import { MAX_CAPTION_PROMPT_LENGTH } from '$lib/validations/captionPromptSchema';
 
 	export let data: PageData;
 </script>
@@ -35,7 +36,12 @@
 			<p>Upload image or drag and drop</p>
 		</label>
 
-		<TextArea name="captionPrompt" label="Caption Prompt" placeholder="Enter prompt here" />
+		<TextArea
+			name="captionPrompt"
+			label="Caption Prompt"
+			placeholder="Enter prompt here"
+			maxlength={MAX_CAPTION_PROMPT_LENGTH}
+		/>
 
 		<SubmitButton>Generate Caption</SubmitButton>
 	</form>
