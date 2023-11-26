@@ -5,7 +5,7 @@
 	import ThemeToggler from './ThemeToggler.svelte';
 </script>
 
-<header class="relative border-b">
+<header class="relative mb-8 border-b">
 	<div class="container flex items-center justify-between p-2">
 		<Button
 			href={Routes.HOMEPAGE}
