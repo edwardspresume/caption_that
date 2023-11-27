@@ -6,6 +6,7 @@ export const MAX_CAPTION_PROMPT_LENGTH = 300;
 
 export const captionContextSchema = z.object({
 	captionLength: z.nativeEnum(CaptionLengthEnum).optional(),
+	captionTone: z.nativeEnum(CaptionLengthEnum).optional(),
 
 	captionContext: z
 		.string()

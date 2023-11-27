@@ -14,6 +14,7 @@
 	import CaptionLengthSelector from '$components/form/CaptionLengthSelector.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';
 	import TextArea from '$components/form/TextArea.svelte';
+	import CaptionToneSelector from './CaptionToneSelector.svelte';
 
 	export let currentCaption = '';
 	export let captionContextForm: SuperValidated<CaptionContextSchema>;
@@ -112,7 +113,11 @@
 		</p>
 	</label>
 
-	<CaptionLengthSelector />
+	<div class="flex flex-col gap-8 sm:flex-row">
+		<CaptionLengthSelector />
+
+		<CaptionToneSelector />
+	</div>
 
 	<TextArea
 		name="captionContext"

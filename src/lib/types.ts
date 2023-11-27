@@ -28,6 +28,16 @@ export enum CaptionLengthEnum {
 	VeryLong = 'very-long'
 }
 
+export enum CaptionToneEnum {
+	Funny = 'funny',
+	Serious = 'serious',
+	Casual = 'casual',
+	Formal = 'formal',
+	Inspirational = 'inspirational',
+	Enthusiastic = 'enthusiastic',
+	Informative = 'informative'
+}
+
 // Type for prettifying an object type
 export type Prettify<T> = {
 	[K in keyof T]: T[K];
