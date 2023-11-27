@@ -50,8 +50,8 @@ async function generateImageCaption({
 
 	const systemMessage = `
 	Generate a ${
-		captionLength ?? 'medium'
-	} length Instagram caption for the following image. And please do not wrap the caption in quotes.`;
+		captionLength ? `${captionLength} length` : ''
+	} Instagram caption for the following image. And please do not wrap the caption in quotes.`;
 
 	const userMessageContent = captionContext ?? 'No additional context provided.';
 
