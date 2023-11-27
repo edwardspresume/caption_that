@@ -24,6 +24,12 @@
 
 	const MAX_IMAGE_SIZE_MB = 10;
 
+	// Reset caption when a new image is uploaded
+	$: if (uploadedImageUrl) {
+		generatedCaption = '';
+		captionCopied = false;
+	}
+
 	function handleImageUpload(event: Event) {
 		const input = event.target as HTMLInputElement;
 
@@ -42,8 +48,6 @@
 				// Revoke the old URL if it exists
 				uploadedImageUrl && URL.revokeObjectURL(uploadedImageUrl);
 				uploadedImageUrl = URL.createObjectURL(file);
-
-				generatedCaption = '';
 			} catch (e) {
 				toast.error('Failed to upload image. Please try again.');
 			} finally {
