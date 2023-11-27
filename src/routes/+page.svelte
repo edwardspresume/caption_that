@@ -122,8 +122,6 @@
 				rows="4"
 				label="Context for Caption (optional)"
 				placeholder={`Provide context or themes to help guide the generation of your caption. \n\nExample: Emphasis on fashion and aesthetics`}
-				bind:value={$form.captionContext}
-				errorMessage={$errors.captionContext}
 				maxlength={MAX_CAPTION_PROMPT_LENGTH}
 			/>
 

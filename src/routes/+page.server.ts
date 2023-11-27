@@ -14,10 +14,11 @@ import { captionContextSchema } from '$validations/captionContextSchema';
 
 type AnalysisData = {
 	imageBase64: string;
-	captionContext: string;
+	captionContext?: string;
+	captionLength?: 'short' | 'medium' | 'long' | 'very-long';
 };
 
-async function generateImageCaption({ imageBase64, captionContext }: AnalysisData) {
+async function generateImageCaption({ imageBase64, captionContext, captionLength }: AnalysisData) {
 	const openai = new OpenAI({
 		apiKey: SECRET_OPENAI_API_KEY
 	});
@@ -29,12 +30,14 @@ async function generateImageCaption({ imageBase64, captionContext }: AnalysisDat
 		messages: [
 			{
 				role: 'system',
-				content: `Please generate a caption for this image`
+				content: `Generate a(n) ${
+					captionLength ?? 'medium'
+				} length Instagram caption for the following image.`
 			},
 			{
 				role: 'user',
 				content: [
-					{ type: 'text', text: captionContext },
+					{ type: 'text', text: captionContext ?? '' },
 					{
 						type: 'image_url',
 						image_url: {
@@ -71,6 +74,15 @@ export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
 
+		console.log('formData', formData);
+
+		const captionLength = formData.get('captionLength') as
+			| 'short'
+			| 'medium'
+			| 'long'
+			| 'very-long';
+		const captionContext = formData.get('captionContext') as string;
+
 		const captionContextForm = await superValidate<typeof captionContextSchema, AlertMessage>(
 			formData,
 			captionContextSchema
@@ -103,14 +115,15 @@ export const actions: Actions = {
 		const base64Image = imageBuffer.toString('base64');
 
 		try {
-			const openAiResponse = await generateImageCaption({
+			const generatedCaption = await generateImageCaption({
 				imageBase64: `data:image/jpeg;base64,${base64Image}`,
-				captionContext: captionContextForm.data.captionContext
+				captionContext,
+				captionLength
 			});
 
 			return message(captionContextForm, {
 				alertType: 'success',
-				alertText: openAiResponse
+				alertText: generatedCaption
 			});
 		} catch (error) {
 			console.error('Error analyzing image:', error);
