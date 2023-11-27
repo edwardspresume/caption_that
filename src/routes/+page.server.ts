@@ -12,7 +12,7 @@ import sharp from 'sharp';
 import type { AlertMessage, CaptionLength } from '$lib/types';
 import { captionContextSchema } from '$validations/captionContextSchema';
 
-type AnalysisData = {
+type ImageCaptionRequest = {
 	imageBase64: string;
 	captionContext?: string;
 	captionLength?: CaptionLength;
@@ -32,24 +32,38 @@ const imageValidationSchema = z.object({
 		.refine((file) => file.size > 0, 'No file uploaded')
 		.refine((file) => file.type.startsWith('image/'), 'Uploaded file is not an image')
 		.refine((file) => supportedImageTypes[file.type], {
-			message: 'Unsupported image type. Please upload a JPEG, PNG, WEBP, or GIF image.'
+			message: `Unsupported image type. Supported types are: ${Object.values(
+				supportedImageTypes
+			).join(', ')}.`
 		})
 });
 
 async function compressImage(imageBuffer: Buffer, imageType: keyof sharp.FormatEnum) {
 	// Adjust the quality or size as needed
-	const quality = 80; // Quality percentage
-	const maxWidth = 1080; // Max width in pixels for Instagram-friendly size
+	const quality = 80;
+	const maxWidth = 1080;
 
-	const compressedImageBuffer = await sharp(imageBuffer)
-		.resize({ width: maxWidth })
-		.toFormat(imageType, { quality })
-		.toBuffer();
+	try {
+		const compressedImageBuffer = await sharp(imageBuffer)
+			.resize({ width: maxWidth })
+			.toFormat(imageType, { quality })
+			.toBuffer();
 
-	return `data:image/${imageType};base64,${compressedImageBuffer.toString('base64')}`;
+		return `data:image/${imageType};base64,${compressedImageBuffer.toString('base64')}`;
+	} catch (error) {
+		if (error instanceof Error) {
+			throw new Error('Image compression failed: ' + error.message);
+		} else {
+			throw new Error('Image compression failed');
+		}
+	}
 }
 
-async function generateImageCaption({ imageBase64, captionContext, captionLength }: AnalysisData) {
+async function generateImageCaption({
+	imageBase64,
+	captionContext,
+	captionLength
+}: ImageCaptionRequest) {
 	const openai = new OpenAI({
 		apiKey: SECRET_OPENAI_API_KEY
 	});
@@ -103,7 +117,6 @@ export const actions: Actions = {
 		const formData = await request.formData();
 
 		const imageFile = formData.get('uploadedImage') as File | undefined;
-
 		const captionLength = formData.get('captionLength') as CaptionLength | undefined;
 		const captionContext = formData.get('captionContext') as string | undefined;
 
@@ -129,10 +142,6 @@ export const actions: Actions = {
 		}
 
 		try {
-			//  Convert the Blob to a Buffer and then to a base64 string
-			// const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
-			// const base64Image = imageBuffer.toString('base64');
-
 			const imageType = supportedImageTypes[
 				imageValidationResult.data.uploadedImage.type
 			] as keyof sharp.FormatEnum;
