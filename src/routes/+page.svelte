@@ -41,7 +41,7 @@
 		}
 	}
 
-	function copyToClipboard() {
+	function copyCaptionClipboard() {
 		navigator.clipboard.writeText(generatedCaption);
 
 		captionCopied = true;
@@ -133,7 +133,7 @@
 			<div class="flex items-center justify-between mb-5">
 				<h2 class="text-xl font-bold text-center">Caption</h2>
 
-				<Button class="flex items-center gap-1" on:click={copyToClipboard}>
+				<Button class="flex items-center gap-1" on:click={copyCaptionClipboard}>
 					{#if captionCopied}
 						Copied 👍
 					{:else}
