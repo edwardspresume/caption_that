@@ -15,9 +15,9 @@
 			<Select.Value placeholder="Select caption length" />
 		</Select.Trigger>
 		<Select.Content>
-			<Select.Group class="capitalize">
+			<Select.Group>
 				{#each captionLengthOptions as lengthOption}
-					<Select.Item value={lengthOption} label={lengthOption}>
+					<Select.Item value={lengthOption}>
 						{lengthOption.replace('-', ' ')}
 					</Select.Item>
 				{/each}
