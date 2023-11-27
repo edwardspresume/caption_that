@@ -1,11 +1,130 @@
-import type { PageServerLoad } from './$types';
+import { SECRET_OPENAI_API_KEY } from '$env/static/private';
+import type { Actions, PageServerLoad } from './$types';
 
-import { CaptionPromptSchema } from '$validations/captionPromptSchema';
+import { z } from 'zod';
 
-import { superValidate } from 'sveltekit-superforms/server';
+import { message, superValidate } from 'sveltekit-superforms/server';
+
+import OpenAI from 'openai';
+
+import { Buffer } from 'buffer';
+
+import type { AlertMessage } from '$lib/types';
+import { captionContextSchema } from '$validations/captionContextSchema';
+
+type AnalysisData = {
+	imageBase64: string;
+	captionContext: string;
+};
+
+async function generateImageCaption({ imageBase64, captionContext }: AnalysisData) {
+	const openai = new OpenAI({
+		apiKey: SECRET_OPENAI_API_KEY
+	});
+
+	const response: OpenAI.Chat.ChatCompletion = await openai.chat.completions.create({
+		model: 'gpt-4-vision-preview',
+		max_tokens: 2000,
+		temperature: 0.8,
+		messages: [
+			{
+				role: 'system',
+				content: `Please generate a caption for this image`
+			},
+			{
+				role: 'user',
+				content: [
+					{ type: 'text', text: captionContext },
+					{
+						type: 'image_url',
+						image_url: {
+							url: imageBase64
+						}
+					}
+				]
+			}
+		]
+	});
+
+	const imageCaption = response.choices[0].message.content;
+
+	if (!imageCaption) {
+		throw new Error('No caption returned please try again');
+	}
+
+	return imageCaption;
+}
+
+const ImageSchema = z.object({
+	uploadedImage: z
+		.instanceof(File)
+		.refine((file) => file.type.startsWith('image/'), 'Uploaded file is not an image')
+});
 
 export const load: PageServerLoad = async () => {
 	return {
-		captionPromptForm: superValidate(CaptionPromptSchema)
+		captionContextForm: superValidate(captionContextSchema)
 	};
+};
+
+export const actions: Actions = {
+	default: async ({ request }) => {
+		const formData = await request.formData();
+
+		const captionContextForm = await superValidate<typeof captionContextSchema, AlertMessage>(
+			formData,
+			captionContextSchema
+		);
+
+		const imageFile = formData.get('uploadedImage') as File | null;
+
+		const validationResult = ImageSchema.safeParse({ uploadedImage: imageFile });
+
+		if (!validationResult.success) {
+			return message(captionContextForm, {
+				alertType: 'error',
+				alertText: 'Please upload an image'
+			});
+		}
+
+		if (!captionContextForm.valid) {
+			console.log('here');
+
+			return message(captionContextForm, {
+				alertType: 'error',
+				alertText: 'Invalid prompt'
+			});
+		}
+
+		if (!imageFile) return;
+
+		//  Convert the Blob to a Buffer and then to a base64 string
+		const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
+		const base64Image = imageBuffer.toString('base64');
+
+		try {
+			const openAiResponse = await generateImageCaption({
+				imageBase64: `data:image/jpeg;base64,${base64Image}`,
+				captionContext: captionContextForm.data.captionContext
+			});
+
+			return message(captionContextForm, {
+				alertType: 'success',
+				alertText: openAiResponse
+			});
+		} catch (error) {
+			console.error('Error analyzing image:', error);
+
+			return message(
+				captionContextForm,
+				{
+					alertType: 'error',
+					alertText: 'Error analyzing image please try again'
+				},
+				{
+					status: 500
+				}
+			);
+		}
+	}
 };
