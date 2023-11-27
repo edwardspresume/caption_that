@@ -1,10 +1,11 @@
+import { CaptionLength } from '$lib/types';
 import { z } from 'zod';
 
 export const MAX_CAPTION_PROMPT_LENGTH = 300;
 
 export const captionContextSchema = z.object({
-	captionLength: z.enum(['short', 'medium', 'long', 'very-long']).optional(),
-	
+	captionLength: z.nativeEnum(CaptionLength).optional(),
+
 	captionContext: z
 		.string()
 		.min(1, 'Prompt is required')

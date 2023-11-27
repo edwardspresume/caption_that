@@ -21,6 +21,13 @@ export type EnterKeyHint =
 	| null
 	| undefined;
 
+export enum CaptionLength {
+	Short = 'short',
+	Medium = 'medium',
+	Long = 'long',
+	VeryLong = 'very-long'
+}
+
 // Type for prettifying an object type
 export type Prettify<T> = {
 	[K in keyof T]: T[K];
