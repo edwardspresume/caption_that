@@ -98,7 +98,11 @@ export const actions: Actions = {
 			captionContextSchema
 		);
 
+		let imageType: string | undefined;
+
 		const imageFile = formData.get('uploadedImage') as File | null;
+
+		if (imageFile) imageType = imageFile.type;
 
 		const validationResult = ImageSchema.safeParse({ uploadedImage: imageFile });
 
@@ -133,7 +137,7 @@ export const actions: Actions = {
 
 		try {
 			const currentCaption = await generateImageCaption({
-				imageBase64: `data:image/jpeg;base64,${base64Image}`,
+				imageBase64: `data:${imageType};base64,${base64Image}`,
 				captionContext,
 				captionLength
 			});
