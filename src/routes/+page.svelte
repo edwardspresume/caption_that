@@ -35,6 +35,10 @@
 					imageValidationResult.error.errors[0]?.message || 'An unexpected error occurred';
 
 				toast.error(errorMessage);
+
+				// Reset input to allow re-triggering upload of the same file, enabling error message display on repeated attempts.
+				input.value = '';
+
 				return;
 			}
 
