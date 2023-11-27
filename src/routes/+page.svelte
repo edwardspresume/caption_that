@@ -90,69 +90,72 @@
 
 <Toaster richColors closeButton position="top-right" />
 
-<div class="container max-w-xl p-2 pb-10">
-	<section>
-		<header class="mb-6 text-center">
-			<h1 class="flex items-center justify-center gap-1 mb-2 text-2xl font-bold">
-				<StarredTitle>Image Caption Creator</StarredTitle>
-			</h1>
+<div class="container max-w-xl p-2 pb-8">
+	<header class="mb-6 text-center">
+		<h1 class="flex items-center justify-center gap-1 mb-1 text-2xl font-bold">
+			<StarredTitle>Image Caption Creator</StarredTitle>
+		</h1>
 
-			<p class="text-muted-foreground">
-				Upload your image to receive a unique and descriptive caption
-			</p>
-		</header>
+		<p class="text-muted-foreground">
+			Upload your image to receive a unique and descriptive caption
+		</p>
+	</header>
 
-		<form method="post" use:enhance enctype="multipart/form-data" class="grid gap-8">
-			<label
-				class="relative grid gap-2 p-4 transition-colors duration-300 border-2 border-dashed rounded-lgborder-foreground/30 place-content-center justify-items-center hover:bg-accent/40"
-			>
-				<input
-					type="file"
-					accept="image/*"
-					name="uploadedImage"
-					class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-					on:change={handleImageUpload}
-				/>
-
-				{#if isImageUploadInProgress}
-					<iconify-icon icon="eos-icons:bubble-loading" class="text-5xl"></iconify-icon>
-				{:else if uploadedImageUrl}
-					<img
-						src={uploadedImageUrl}
-						alt="Uploaded Preview"
-						class="object-cover border rounded border-foreground/10 max-h-28"
-					/>
-				{:else}
-					<iconify-icon icon="flat-color-icons:add-image" class="text-5xl"></iconify-icon>
-				{/if}
-
-				<p>Upload image or drag and drop</p>
-			</label>
-
-			<CaptionLengthSelector />
-
-			<TextArea
-				name="captionContext"
-				rows="4"
-				label="Context for Caption (optional)"
-				placeholder={`Provide context or themes to help guide the generation of your caption. \n\nExample: Emphasis on fashion and aesthetics`}
-				maxlength={MAX_CAPTION_PROMPT_LENGTH}
+	<form method="post" use:enhance enctype="multipart/form-data" class="grid gap-8">
+		<label
+			class="relative grid gap-2 p-4 transition-colors duration-300 border-2 border-dashed rounded-md border-foreground/30 place-content-center justify-items-center hover:bg-accent/40"
+		>
+			<input
+				type="file"
+				accept="image/*"
+				name="uploadedImage"
+				class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+				on:change={handleImageUpload}
 			/>
 
-			<SubmitButton disabled={$delayed}>
-				{#if $delayed}
-					Generating...
-				{:else}
-					Generate Caption
-				{/if}
-			</SubmitButton>
-		</form>
-	</section>
+			{#if isImageUploadInProgress}
+				<iconify-icon icon="eos-icons:bubble-loading" class="text-5xl"></iconify-icon>
+			{:else if uploadedImageUrl}
+				<img
+					src={uploadedImageUrl}
+					alt="Uploaded Preview"
+					class="object-contain border rounded-md border-foreground/10 max-h-28"
+				/>
+			{:else}
+				<iconify-icon icon="flat-color-icons:add-image" class="text-5xl"></iconify-icon>
+			{/if}
+
+			<p>
+				Upload image or drag and drop
+
+				<span class="text-sm text-muted-foreground">
+					(Max file size: {MAX_IMAGE_SIZE_MB}MB)
+				</span>
+			</p>
+		</label>
+
+		<CaptionLengthSelector />
+
+		<TextArea
+			name="captionContext"
+			label="Context for Caption (optional)"
+			placeholder={`Provide context or themes to help guide the generation of your caption. \n\nExample: Emphasis on fashion and aesthetics`}
+			maxlength={MAX_CAPTION_PROMPT_LENGTH}
+		/>
+
+		<SubmitButton disabled={$delayed}>
+			{#if $delayed}
+				Generating...
+			{:else}
+				Generate Caption
+			{/if}
+		</SubmitButton>
+	</form>
 
 	{#if generatedCaption}
-		<section class="p-5 mt-10 border rounded-md">
+		<section class="p-4 mt-10 border rounded-md">
 			<div class="flex items-center justify-between mb-5">
-				<h2 class="text-xl font-bold text-center">Caption</h2>
+				<h2 class="text-xl font-bold">Caption</h2>
 
 				<Button class="flex items-center gap-1" on:click={copyCaptionClipboard}>
 					{#if captionCopied}
@@ -164,7 +167,7 @@
 				</Button>
 			</div>
 
-			<p class="p-4 space-y-5 bg-accent rounded max-h-[400px] overflow-hidden overflow-y-auto">
+			<p class="p-3 bg-accent rounded-md max-h-[400px] shadow-md overflow-hidden overflow-y-auto">
 				{generatedCaption}
 			</p>
 		</section>
