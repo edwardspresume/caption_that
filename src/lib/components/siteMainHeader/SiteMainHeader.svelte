@@ -2,6 +2,7 @@
 	import { Routes } from '$lib/navLinks';
 
 	import StarredTitle from '$components/StarredTitle.svelte';
+	import FeedbackForm from '$components/form/FeedbackForm.svelte';
 	import Button from '$components/ui/button/button.svelte';
 	import ThemeToggler from './ThemeToggler.svelte';
 </script>
@@ -12,6 +13,9 @@
 			<StarredTitle>CaptionThat</StarredTitle>
 		</Button>
 
-		<ThemeToggler />
+		<div class="flex gap-2">
+			<FeedbackForm />
+			<ThemeToggler />
+		</div>
 	</div>
 </header>
