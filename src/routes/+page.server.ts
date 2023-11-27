@@ -22,6 +22,7 @@ const supportedImageTypes: Record<string, keyof sharp.FormatEnum> = {
 	'image/jpeg': 'jpeg',
 	'image/png': 'png',
 	'image/webp': 'webp',
+	'image/avif': 'avif',
 	'image/gif': 'gif'
 };
 
