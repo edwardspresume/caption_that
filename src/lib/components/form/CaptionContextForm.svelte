@@ -114,7 +114,7 @@
 
 		<p class="text-muted-foreground">
 			<span class="font-semibold">Privacy Notice:</span> We respect your privacy. Images uploaded are
-			not saved on our servers and are only used for caption generation
+			not saved on our servers and are only used for caption generation.
 		</p>
 	</label>
 
