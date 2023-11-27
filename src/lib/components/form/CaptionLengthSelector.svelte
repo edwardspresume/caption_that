@@ -11,7 +11,7 @@
 </script>
 
 <Label class="grid gap-2">
-	<span>Caption length</span>
+	<span>Caption length (optional)</span>
 
 	<Select.Root portal={null}>
 		<Select.Trigger class="w-full">
