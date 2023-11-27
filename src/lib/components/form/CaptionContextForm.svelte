@@ -82,7 +82,7 @@
 
 <form method="post" use:enhance enctype="multipart/form-data" class="grid gap-8">
 	<label
-		class="relative grid gap-2 p-4 transition-colors duration-300 border-2 border-dashed rounded-md border-foreground/30 place-content-center justify-items-center hover:bg-accent/40"
+		class="relative grid gap-2 p-4 text-sm text-center transition-colors duration-300 border-2 border-dashed rounded-md border-foreground/30 place-content-center justify-items-center hover:bg-accent/40"
 	>
 		<input
 			type="file"
@@ -110,6 +110,11 @@
 			<span class="text-sm text-muted-foreground">
 				(Max file size: {MAX_FILE_SIZE_MB}MB)
 			</span>
+		</p>
+
+		<p class="text-muted-foreground">
+			<span class="font-semibold">Privacy Notice:</span> We respect your privacy. Images uploaded are
+			not saved on our servers and are only used for caption generation
 		</p>
 	</label>
 
