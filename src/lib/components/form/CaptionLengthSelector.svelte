@@ -1,13 +1,10 @@
 <script lang="ts">
+	import { CaptionLengthEnum } from '$lib/types';
+
 	import Label from '$components/ui/label/label.svelte';
 	import * as Select from '$components/ui/select';
 
-	const captionLengthOptions = [
-		{ value: 'short', label: 'Short' },
-		{ value: 'medium', label: 'Medium' },
-		{ value: 'long', label: 'Long' },
-		{ value: 'very-long', label: 'Very Long' }
-	];
+	const captionLengthOptions = Object.values(CaptionLengthEnum);
 </script>
 
 <Label class="grid gap-2">
@@ -18,11 +15,10 @@
 			<Select.Value placeholder="Select caption length" />
 		</Select.Trigger>
 		<Select.Content>
-			<Select.Group>
-				<Select.Label>Caption Length</Select.Label>
+			<Select.Group class="capitalize">
 				{#each captionLengthOptions as lengthOption}
-					<Select.Item value={lengthOption.value} label={lengthOption.label}>
-						{lengthOption.label}
+					<Select.Item value={lengthOption} label={lengthOption}>
+						{lengthOption.replace('-', ' ')}
 					</Select.Item>
 				{/each}
 			</Select.Group>
