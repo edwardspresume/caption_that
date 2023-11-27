@@ -127,7 +127,7 @@
 	<TextArea
 		name="captionContext"
 		label="Context (optional)"
-		placeholder={`Provide context or themes to help guide the generation of your caption. \n\nExample: Emphasis on fashion and aesthetics`}
+		placeholder={`Provide context or themes to help guide the generation of your caption. \n\nExample: Emphasis on fashion and aesthetics, or no hashtags`}
 		maxlength={MAX_CAPTION_PROMPT_LENGTH}
 	/>
 

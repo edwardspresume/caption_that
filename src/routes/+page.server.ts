@@ -53,9 +53,9 @@ async function generateImageCaption({
 	const systemMessage = `
 	Generate a ${captionLength ? `${captionLength} length` : ''} Instagram caption ${
 		captionTone ? `with a ${captionTone} tone` : ''
-	} for the following image. And please do not wrap the caption in quotes.`;
-
-	const userMessageContent = captionContext ?? 'No additional context provided.';
+	} for the following image. And please do not wrap the caption in quotes. ${
+		captionContext ? `Context: ${captionContext}` : ''
+	}`;
 
 	const response: OpenAI.Chat.ChatCompletion = await openai.chat.completions.create({
 		model: 'gpt-4-vision-preview',
@@ -67,7 +67,7 @@ async function generateImageCaption({
 			{
 				role: 'user',
 				content: [
-					{ type: 'text', text: userMessageContent },
+					{ type: 'text', text: '' },
 					{
 						type: 'image_url',
 						image_url: {
