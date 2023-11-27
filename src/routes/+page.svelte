@@ -133,7 +133,13 @@
 				maxlength={MAX_CAPTION_PROMPT_LENGTH}
 			/>
 
-			<SubmitButton disabled={$delayed}>Generate Caption</SubmitButton>
+			<SubmitButton disabled={$delayed}>
+				{#if $delayed}
+					Generating...
+				{:else}
+					Generate Caption
+				{/if}
+			</SubmitButton>
 		</form>
 	</section>
 
