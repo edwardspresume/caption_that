@@ -75,7 +75,7 @@
 			}
 
 			if (alertType === 'success') {
-				toast.success('Caption Created!');
+				toast.success('Caption Created! Scroll down to view 👇');
 				generatedCaption = alertText;
 			}
 		}
