@@ -84,7 +84,7 @@
 			</h1>
 
 			<p class="text-muted-foreground">
-				Upload your image to receive a unique and descriptive caption.
+				Upload your image to receive a unique and descriptive caption
 			</p>
 		</header>
 
