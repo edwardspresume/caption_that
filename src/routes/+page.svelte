@@ -82,7 +82,7 @@
 	});
 </script>
 
-<Toaster richColors closeButton />
+<Toaster richColors closeButton={true} position="top-center" />
 
 <div class="container max-w-xl p-2 pb-10">
 	<section>
