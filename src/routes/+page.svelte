@@ -10,6 +10,7 @@
 	} from '$validations/captionContextSchema';
 
 	import StarredTitle from '$components/StarredTitle.svelte';
+	import CaptionLengthSelector from '$components/form/CaptionLengthSelector.svelte';
 	import SubmitButton from '$components/form/SubmitButton.svelte';
 	import TextArea from '$components/form/TextArea.svelte';
 	import Button from '$components/ui/button/button.svelte';
@@ -113,6 +114,8 @@
 
 				<p>Upload image or drag and drop</p>
 			</label>
+
+			<CaptionLengthSelector />
 
 			<TextArea
 				name="captionContext"
