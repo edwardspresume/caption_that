@@ -8,6 +8,7 @@
 		MAX_CAPTION_PROMPT_LENGTH,
 		captionContextSchema
 	} from '$validations/captionContextSchema';
+	import { MAX_FILE_SIZE_MB, imageValidationSchema } from '$validations/imageValidationSchema';
 
 	import StarredTitle from '$components/StarredTitle.svelte';
 	import CaptionLengthSelector from '$components/form/CaptionLengthSelector.svelte';
@@ -17,7 +18,6 @@
 
 	export let data: PageData;
 
-	const MAX_IMAGE_SIZE_MB = 10;
 	let uploadedImageUrl: string | null = null;
 	let isImageUploadInProgress = false;
 	let captionCopied = false;
@@ -28,10 +28,13 @@
 
 		if (input.files?.[0]) {
 			const file = input.files[0];
+			const imageValidationResult = imageValidationSchema.safeParse({ uploadedImage: file });
 
-			// Check if the image size exceeds the maximum limit
-			if (file.size > MAX_IMAGE_SIZE_MB * 1024 * 1024) {
-				toast.error(`Image size must be less than ${MAX_IMAGE_SIZE_MB} MB`);
+			if (!imageValidationResult.success) {
+				const errorMessage =
+					imageValidationResult.error.errors[0]?.message || 'An unexpected error occurred';
+
+				toast.error(errorMessage);
 				return;
 			}
 
@@ -125,7 +128,7 @@
 				Upload image or drag and drop
 
 				<span class="text-sm text-muted-foreground">
-					(Max file size: {MAX_IMAGE_SIZE_MB}MB)
+					(Max file size: {MAX_FILE_SIZE_MB}MB)
 				</span>
 			</p>
 		</label>

@@ -4,39 +4,19 @@ import type { Actions, PageServerLoad } from './$types';
 import OpenAI from 'openai';
 
 import { message, superValidate } from 'sveltekit-superforms/server';
-import { z } from 'zod';
 
 import { Buffer } from 'buffer';
 import sharp from 'sharp';
 
 import type { AlertMessage, CaptionLength } from '$lib/types';
 import { captionContextSchema } from '$validations/captionContextSchema';
+import { imageValidationSchema, supportedImageTypes } from '$validations/imageValidationSchema';
 
 type ImageCaptionRequest = {
 	imageBase64: string;
 	captionContext?: string;
 	captionLength?: CaptionLength;
 };
-
-const supportedImageTypes: Record<string, keyof sharp.FormatEnum> = {
-	'image/jpeg': 'jpeg',
-	'image/png': 'png',
-	'image/webp': 'webp',
-	'image/avif': 'avif',
-	'image/gif': 'gif'
-};
-
-const imageValidationSchema = z.object({
-	uploadedImage: z
-		.instanceof(File)
-		.refine((file) => file.size > 0, 'No file uploaded')
-		.refine((file) => file.type.startsWith('image/'), 'Uploaded file is not an image')
-		.refine((file) => supportedImageTypes[file.type], {
-			message: `Unsupported image type. Supported types are: ${Object.values(
-				supportedImageTypes
-			).join(', ')}.`
-		})
-});
 
 async function compressImage(imageBuffer: Buffer, imageType: keyof sharp.FormatEnum) {
 	// Adjust the quality or size as needed
