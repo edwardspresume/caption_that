@@ -88,8 +88,8 @@
 
 <div class="container max-w-xl p-2 pb-10">
 	<section>
-		<header class="text-center mb-7">
-			<h1 class="flex items-center justify-center gap-1 mb-3 text-2xl font-bold">
+		<header class="mb-6 text-center">
+			<h1 class="flex items-center justify-center gap-1 mb-2 text-2xl font-bold">
 				<StarredTitle>Image Caption Creator</StarredTitle>
 			</h1>
 
