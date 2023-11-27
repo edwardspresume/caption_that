@@ -59,7 +59,7 @@
 
 		setTimeout(() => {
 			captionCopied = false;
-		}, 1000);
+		}, 2000);
 	}
 
 	const { enhance, form, delayed, message, errors } = superForm(data.captionContextForm, {
