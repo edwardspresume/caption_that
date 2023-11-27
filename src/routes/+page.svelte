@@ -84,7 +84,7 @@
 	});
 </script>
 
-<Toaster richColors closeButton={true} position="top-center" />
+<Toaster richColors closeButton position="top-right" />
 
 <div class="container max-w-xl p-2 pb-10">
 	<section>
