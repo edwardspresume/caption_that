@@ -22,11 +22,19 @@
 	let captionCopied = false;
 	$: generatedCaption = '';
 
+	const MAX_IMAGE_SIZE_MB = 10;
+
 	function handleImageUpload(event: Event) {
 		const input = event.target as HTMLInputElement;
 
 		if (input.files?.[0]) {
 			const file = input.files[0];
+
+			// Check if the image size exceeds the maximum limit
+			if (file.size > MAX_IMAGE_SIZE_MB * 1024 * 1024) {
+				toast.error(`Image size must be less than ${MAX_IMAGE_SIZE_MB} MB`);
+				return;
+			}
 
 			isImageUploadInProgress = true;
 
