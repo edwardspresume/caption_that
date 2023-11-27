@@ -8,6 +8,7 @@ import { message, superValidate } from 'sveltekit-superforms/server';
 import OpenAI from 'openai';
 
 import { Buffer } from 'buffer';
+import sharp from 'sharp';
 
 import type { AlertMessage } from '$lib/types';
 import { captionContextSchema } from '$validations/captionContextSchema';
@@ -17,6 +18,17 @@ type AnalysisData = {
 	captionContext?: string;
 	captionLength?: 'short' | 'medium' | 'long' | 'very-long';
 };
+
+async function compressImage(imageBuffer: Buffer): Promise<Buffer> {
+	// Adjust the quality or size as needed
+	const quality = 80; // Quality percentage
+	const maxWidth = 1080; // Max width in pixels for Instagram-friendly size
+
+	return sharp(imageBuffer)
+		.resize({ width: maxWidth }) // Resize to maxWidth, keeping aspect ratio
+		.jpeg({ quality }) // Convert to JPEG with the specified quality
+		.toBuffer(); // Convert back to Buffer for further processing
+}
 
 async function generateImageCaption({ imageBase64, captionContext, captionLength }: AnalysisData) {
 	const openai = new OpenAI({
@@ -74,8 +86,6 @@ export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
 
-		console.log('formData', formData);
-
 		const captionLength = formData.get('captionLength') as
 			| 'short'
 			| 'medium'
@@ -111,8 +121,15 @@ export const actions: Actions = {
 		if (!imageFile) return;
 
 		//  Convert the Blob to a Buffer and then to a base64 string
+		// const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
+		// const base64Image = imageBuffer.toString('base64');
+
+		// Convert the Blob to a Buffer
 		const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
-		const base64Image = imageBuffer.toString('base64');
+
+		// Compress the image
+		const compressedImageBuffer = await compressImage(imageBuffer);
+		const base64Image = compressedImageBuffer.toString('base64');
 
 		try {
 			const generatedCaption = await generateImageCaption({
