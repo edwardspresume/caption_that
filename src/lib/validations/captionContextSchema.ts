@@ -1,5 +1,6 @@
-import { CaptionLength } from '$lib/types';
 import { z } from 'zod';
+
+import { CaptionLength } from '$lib/types';
 
 export const MAX_CAPTION_PROMPT_LENGTH = 300;
 
@@ -19,3 +20,5 @@ export const captionContextSchema = z.object({
 		.transform((str: string) => str.trim())
 		.optional()
 });
+
+export type CaptionContextSchema = typeof captionContextSchema;
