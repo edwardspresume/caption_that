@@ -8,7 +8,7 @@
 </script>
 
 <fieldset class="grid w-full gap-2">
-	<Label for="lengthSelector" class="text-xs sm:text-sm">Caption length (optional)</Label>
+	<Label for="lengthSelector" class="text-xs sm:text-sm">Length (optional)</Label>
 
 	<Select.Root portal={null}>
 		<Select.Trigger class="w-full" id="lengthSelector">

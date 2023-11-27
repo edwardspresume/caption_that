@@ -114,14 +114,14 @@
 	</label>
 
 	<div class="flex flex-col gap-8 sm:flex-row">
-		<CaptionLengthSelector />
-
 		<CaptionToneSelector />
+
+		<CaptionLengthSelector />
 	</div>
 
 	<TextArea
 		name="captionContext"
-		label="Context for Caption (optional)"
+		label="Context (optional)"
 		placeholder={`Provide context or themes to help guide the generation of your caption. \n\nExample: Emphasis on fashion and aesthetics`}
 		maxlength={MAX_CAPTION_PROMPT_LENGTH}
 	/>

@@ -8,7 +8,7 @@
 </script>
 
 <fieldset class="grid w-full gap-2">
-	<Label for="toneSelector" class="text-xs sm:text-sm">Caption tone (optional)</Label>
+	<Label for="toneSelector" class="text-xs sm:text-sm">Tone (optional)</Label>
 
 	<Select.Root portal={null}>
 		<Select.Trigger class="w-full" id="toneSelector">
