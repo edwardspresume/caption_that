@@ -21,7 +21,7 @@ export type EnterKeyHint =
 	| null
 	| undefined;
 
-export enum CaptionLength {
+export enum CaptionLengthEnum {
 	Short = 'short',
 	Medium = 'medium',
 	Long = 'long',

@@ -8,14 +8,14 @@ import { message, superValidate } from 'sveltekit-superforms/server';
 import { Buffer } from 'buffer';
 import sharp from 'sharp';
 
-import type { AlertMessage, CaptionLength } from '$lib/types';
+import type { AlertMessage, CaptionLengthEnum } from '$lib/types';
 import { captionContextSchema } from '$validations/captionContextSchema';
 import { imageValidationSchema, supportedImageTypes } from '$validations/imageValidationSchema';
 
 type ImageCaptionRequest = {
 	imageBase64: string;
 	captionContext?: string;
-	captionLength?: CaptionLength;
+	captionLength?: CaptionLengthEnum;
 };
 
 async function compressImage(imageBuffer: Buffer, imageType: keyof sharp.FormatEnum) {
@@ -97,7 +97,7 @@ export const actions: Actions = {
 		const formData = await request.formData();
 
 		const imageFile = formData.get('uploadedImage') as File | undefined;
-		const captionLength = formData.get('captionLength') as CaptionLength | undefined;
+		const captionLength = formData.get('captionLength') as CaptionLengthEnum | undefined;
 		const captionContext = formData.get('captionContext') as string | undefined;
 
 		const captionContextForm = await superValidate<typeof captionContextSchema, AlertMessage>(
