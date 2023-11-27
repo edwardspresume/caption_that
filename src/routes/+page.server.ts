@@ -8,7 +8,7 @@ import { message, superValidate } from 'sveltekit-superforms/server';
 import { Buffer } from 'buffer';
 import sharp from 'sharp';
 
-import type { AlertMessage, CaptionLengthEnum } from '$lib/types';
+import type { AlertMessage, CaptionLengthEnum, CaptionToneEnum } from '$lib/types';
 import { captionContextSchema } from '$validations/captionContextSchema';
 import { imageValidationSchema, supportedImageTypes } from '$validations/imageValidationSchema';
 
@@ -16,6 +16,7 @@ type ImageCaptionRequest = {
 	imageBase64: string;
 	captionContext?: string;
 	captionLength?: CaptionLengthEnum;
+	captionTone?: CaptionToneEnum;
 };
 
 async function compressImage(imageBuffer: Buffer, imageType: keyof sharp.FormatEnum) {
@@ -42,16 +43,17 @@ async function compressImage(imageBuffer: Buffer, imageType: keyof sharp.FormatE
 async function generateImageCaption({
 	imageBase64,
 	captionContext,
-	captionLength
+	captionLength,
+	captionTone
 }: ImageCaptionRequest) {
 	const openai = new OpenAI({
 		apiKey: SECRET_OPENAI_API_KEY
 	});
 
 	const systemMessage = `
-	Generate a ${
-		captionLength ? `${captionLength} length` : ''
-	} Instagram caption for the following image. And please do not wrap the caption in quotes.`;
+	Generate a ${captionLength ? `${captionLength} length` : ''} Instagram caption ${
+		captionTone ? `with a ${captionTone} tone` : ''
+	} for the following image. And please do not wrap the caption in quotes.`;
 
 	const userMessageContent = captionContext ?? 'No additional context provided.';
 
@@ -97,8 +99,9 @@ export const actions: Actions = {
 		const formData = await request.formData();
 
 		const imageFile = formData.get('uploadedImage') as File | undefined;
-		const captionLength = formData.get('captionLength') as CaptionLengthEnum | undefined;
 		const captionContext = formData.get('captionContext') as string | undefined;
+		const captionLength = formData.get('captionLength') as CaptionLengthEnum | undefined;
+		const captionTone = formData.get('captionTone') as CaptionToneEnum | undefined;
 
 		const captionContextForm = await superValidate<typeof captionContextSchema, AlertMessage>(
 			formData,
@@ -132,7 +135,8 @@ export const actions: Actions = {
 			const generatedCaption = await generateImageCaption({
 				imageBase64: base64Image,
 				captionContext,
-				captionLength
+				captionLength,
+				captionTone
 			});
 
 			return message(captionContextForm, {
