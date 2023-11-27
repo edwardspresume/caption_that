@@ -17,8 +17,9 @@
 	export let data: PageData;
 
 	let uploadedImageUrl: string | null = null;
-	let isImageUploadInProgress: boolean = false;
-	$: openAiResponse = '';
+	let isImageUploadInProgress = false;
+	let captionCopied = false;
+	$: generatedCaption = '';
 
 	function handleImageUpload(event: Event) {
 		const input = event.target as HTMLInputElement;
@@ -40,15 +41,13 @@
 		}
 	}
 
-	let copied = false;
-
 	function copyToClipboard() {
-		navigator.clipboard.writeText(openAiResponse);
+		navigator.clipboard.writeText(generatedCaption);
 
-		copied = true;
+		captionCopied = true;
 
 		setTimeout(() => {
-			copied = false;
+			captionCopied = false;
 		}, 1000);
 	}
 
@@ -68,7 +67,7 @@
 
 			if (alertType === 'success') {
 				toast.success('Caption Created!');
-				openAiResponse = alertText;
+				generatedCaption = alertText;
 			}
 		}
 	});
@@ -84,11 +83,11 @@
 			</h1>
 
 			<p class="text-muted-foreground">
-				Upload your image and provide a prompt to receive a unique and descriptive caption.
+				Upload your image to receive a unique and descriptive caption.
 			</p>
 		</header>
 
-		<form method="post" use:enhance enctype="multipart/form-data" class="grid gap-7">
+		<form method="post" use:enhance enctype="multipart/form-data" class="grid gap-8">
 			<label
 				class="relative grid gap-2 p-4 transition-colors duration-300 border-2 border-dashed rounded-lgborder-foreground/30 place-content-center justify-items-center hover:bg-accent/40"
 			>
@@ -129,13 +128,13 @@
 		</form>
 	</section>
 
-	{#if openAiResponse}
+	{#if generatedCaption}
 		<section class="p-5 mt-10 border rounded-md">
 			<div class="flex items-center justify-between mb-5">
 				<h2 class="text-xl font-bold text-center">Caption</h2>
 
 				<Button class="flex items-center gap-1" on:click={copyToClipboard}>
-					{#if copied}
+					{#if captionCopied}
 						Copied 👍
 					{:else}
 						<iconify-icon icon="akar-icons:copy" class="text-lg"></iconify-icon>
@@ -145,7 +144,7 @@
 			</div>
 
 			<p class="p-4 space-y-5 bg-accent rounded max-h-[400px] overflow-hidden overflow-y-auto">
-				{openAiResponse}
+				{generatedCaption}
 			</p>
 		</section>
 	{/if}
