@@ -23,13 +23,6 @@
 	let captionCopied = false;
 	$: currentCaption = '';
 
-
-	// Reset caption when a new image is uploaded
-	$: if (uploadedImageUrl) {
-		currentCaption = '';
-		captionCopied = false;
-	}
-
 	function handleImageUpload(event: Event) {
 		const input = event.target as HTMLInputElement;
 
@@ -48,6 +41,9 @@
 				// Revoke the old URL if it exists
 				uploadedImageUrl && URL.revokeObjectURL(uploadedImageUrl);
 				uploadedImageUrl = URL.createObjectURL(file);
+
+				// Reset caption when a new image is uploaded
+				currentCaption = '';
 			} catch (e) {
 				toast.error('Failed to upload image. Please try again.');
 			} finally {
@@ -153,7 +149,7 @@
 	</form>
 
 	{#if currentCaption}
-		<section class="p-4 mt-10 border rounded-md">
+		<section class="p-4 mt-10 border rounded-md" aria-live="polite">
 			<div class="flex items-center justify-between mb-5">
 				<h2 class="text-xl font-bold">Caption</h2>
 
