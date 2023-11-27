@@ -132,7 +132,7 @@ export const actions: Actions = {
 		const base64Image = compressedImageBuffer.toString('base64');
 
 		try {
-			const generatedCaption = await generateImageCaption({
+			const currentCaption = await generateImageCaption({
 				imageBase64: `data:image/jpeg;base64,${base64Image}`,
 				captionContext,
 				captionLength
@@ -140,7 +140,7 @@ export const actions: Actions = {
 
 			return message(captionContextForm, {
 				alertType: 'success',
-				alertText: generatedCaption
+				alertText: currentCaption
 			});
 		} catch (error) {
 			console.error('Error analyzing image:', error);

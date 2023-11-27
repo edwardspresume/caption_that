@@ -17,16 +17,16 @@
 
 	export let data: PageData;
 
+	const MAX_IMAGE_SIZE_MB = 10;
 	let uploadedImageUrl: string | null = null;
 	let isImageUploadInProgress = false;
 	let captionCopied = false;
-	$: generatedCaption = '';
+	$: currentCaption = '';
 
-	const MAX_IMAGE_SIZE_MB = 10;
 
 	// Reset caption when a new image is uploaded
 	$: if (uploadedImageUrl) {
-		generatedCaption = '';
+		currentCaption = '';
 		captionCopied = false;
 	}
 
@@ -57,7 +57,7 @@
 	}
 
 	function copyCaptionClipboard() {
-		navigator.clipboard.writeText(generatedCaption);
+		navigator.clipboard.writeText(currentCaption);
 
 		captionCopied = true;
 
@@ -82,7 +82,7 @@
 
 			if (alertType === 'success') {
 				toast.success('Caption Created! Scroll down to view 👇');
-				generatedCaption = alertText;
+				currentCaption = alertText;
 			}
 		}
 	});
@@ -152,7 +152,7 @@
 		</SubmitButton>
 	</form>
 
-	{#if generatedCaption}
+	{#if currentCaption}
 		<section class="p-4 mt-10 border rounded-md">
 			<div class="flex items-center justify-between mb-5">
 				<h2 class="text-xl font-bold">Caption</h2>
@@ -168,7 +168,7 @@
 			</div>
 
 			<p class="p-3 bg-accent rounded-md max-h-[400px] shadow-md overflow-hidden overflow-y-auto">
-				{generatedCaption}
+				{currentCaption}
 			</p>
 		</section>
 	{/if}
