@@ -73,8 +73,9 @@
 			}
 
 			if (alertType === 'success') {
-				toast.success('Caption Created! Scroll down to view 👇');
 				currentCaption = alertText;
+
+				toast.success('Caption Created! Scroll down to view 👇');
 			}
 		}
 	});
