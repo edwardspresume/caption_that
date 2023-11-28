@@ -11,7 +11,10 @@ import { message, superValidate } from 'sveltekit-superforms/server';
 import type { AlertMessageType } from '$lib/types';
 
 import { logError } from '$lib/utils';
-import { FeedbackValidationSchema } from '$validations/feedbackValidationSchema';
+import {
+	FeedbackValidationSchema,
+	type FeedbackValidationSchemaType
+} from '$validations/feedbackValidationSchema';
 
 const window = new JSDOM('').window;
 const DOMPurifyInstance = DOMPurify(window);
@@ -46,7 +49,7 @@ async function sendEmail(mailOptions: object) {
 
 export const actions: Actions = {
 	default: async ({ request }) => {
-		const feedbackForm = await superValidate<typeof FeedbackValidationSchema, AlertMessageType>(
+		const feedbackForm = await superValidate<FeedbackValidationSchemaType, AlertMessageType>(
 			request,
 			FeedbackValidationSchema
 		);
