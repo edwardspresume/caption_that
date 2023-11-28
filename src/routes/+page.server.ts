@@ -79,7 +79,6 @@ async function generateImageCaption({
 			{
 				role: 'user',
 				content: [
-					{ type: 'text', text: '' },
 					{
 						type: 'image_url',
 						image_url: {
