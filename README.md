@@ -1,82 +1,47 @@
-# SvelteKit Starter Template
+# Image Caption Generator
 
-This starter template is designed for developers looking to jumpstart their [SvelteKit](https://kit.svelte.dev/) projects. It comes pre-configured with a suite of tools in aim to enforce best practices and ensure high-quality, maintainable code.
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-
-Ensure you have `pnpm` installed on your system for efficient package management. For installation instructions, visit the [official pnpm installation guide](https://pnpm.io/installation).
-
-### Installation
-
-To install the dependencies, run the following command:
-
-```bash
-pnpm install
-```
-
-### Development
-
-To start the development server, run:
-
-```bash
-pnpm dev
-```
-
-This will start the server and open the app in a new browser tab by visiting http://localhost:5173/. Changes in the code will automatically rebuild the app and refresh the page.
-
-### Build
-
-To build the application for production, use:
-
-```bash
-pnpm build
-```
+This project is a web application that generates descriptive captions for images. It utilizes OpenAI's GPT-4 Vision model to craft the captions.
 
 ## Features
 
-### Language and Typing
+- Upload an image and receive a unique, descriptive caption.
+- Provide context or themes to guide the generation of your caption.
+- The application respects user privacy. Images uploaded are not saved on our servers and are only used for caption generation.
 
-- 📘 **[TypeScript](https://www.typescriptlang.org/)**: Static types for JavaScript.
-- 🔧 **[TS Reset](https://www.totaltypescript.com/ts-reset)**: Improved TypeScript type checking.
+## Tech Stack
 
-### Styling and UI
+- SvelteKit
+- TypeScript
+- Tailwind CSS
+- OpenAI
 
-- 🎨 **[PostCSS Preset Env](https://www.npmjs.com/package/postcss-preset-env)**: Facilitates the use of modern CSS features.
-- 🧩 **[Shadcn-svelte](https://www.shadcn-svelte.com/)**: Accessible and customizable component library.
-- 💨 **[Tailwind CSS](https://tailwindcss.com/)**: Utility-first CSS framework for rapid UI development.
-- 🤝 **[Tailwind Merge](https://github.com/dcastil/tailwind-merge)** & **[clsx](https://github.com/lukeed/clsx)**: Allows you to merge classes together.
+## Getting Started
 
-### Icons and Progress Indicators
+1. Clone the repository.
+2. Install the dependencies using `pnpm install`.
+3. Create a `.env` file in the root directory and add your OpenAI API key as `SECRET_OPENAI_API_KEY`.
+4. Run the development server using `pnpm run dev`.
 
-- 🎨 **[Iconify](https://iconify.design/docs/iconify-icon/)**: Extensive SVG icons.
-- ⏳ **[Svelte Progress](https://www.npmjs.com/package/@bobbymannino/svelte-progress)**: Loading indicators components.
+## Scripts
 
-### Code Quality and Testing
+The `package.json` file includes several scripts for development and deployment:
 
-- 🛠️ **[ESLint](https://eslint.org/)** & **✨ [Prettier](https://prettier.io/)**: Code quality tools.
-- 🧪 **Testing**: Unit tests with [Vitest](https://vitest.dev/), E2E tests with [Playwright](https://playwright.dev/).
-- 📜 **[JSDOM](https://github.com/jsdom/jsdom)**: Simulates the DOM for testing.
+- `dev`: Starts the development server.
+- `build`: Builds the application for production.
+- `preview`: Previews the built application.
+- `test`: Runs end-to-end and unit tests.
+- `check`: Runs Svelte check and TypeScript sync.
+- `lint`: Runs Prettier and ESLint.
+- `format`: Formats the codebase using Prettier.
 
-### Plugins
+## Testing
 
-- **[@sveltejs/enhanced-img](https://www.npmjs.com/package/@sveltejs/enhanced-img)**: Experimental image optimization.
+The project uses Playwright for end-to-end testing and Vitest for unit testing. Configuration for Playwright can be found in `playwright.config.ts` and for Vitest in `vite.config.ts`.
 
-## Additions to the default SvelteKit TSConfig
+## Code Structure
 
-- `noUnusedLocals`: Avoids unused variable declarations.
-- `moduleDetection`: Enhanced module detection.
-- `noUnusedParameters`: Checks for unused function parameters.
-- `verbatimModuleSyntax`: Preserves module syntax upon import.
-- `noUncheckedIndexedAccess`: Enforces checks on indexed access.
-- `types`: Includes Vitest's global type definitions.
+The main application code resides in the `src` directory. Utility functions and shared components are located in the `lib` directory. Server-side logic for handling requests is in the `routes` directory.
 
-## Checklist
+## Contributing
 
-When you use this template, try follow the checklist to update your info properly
-
-- [ ] Change the favicon in `static`
-- [ ] Add sitemap to `static`
+Feedback and contributions are welcome! If you encounter a bug or have a suggestion, please open an issue. For contributions, feel free to make a pull request.
