@@ -21,8 +21,7 @@ export type EnterKeyHintType =
 	| null
 	| undefined;
 
-
 // Type for prettifying an object type
-export type Prettify<T> = {
+export type PrettifyType<T> = {
 	[K in keyof T]: T[K];
 } & Record<string, never>;
