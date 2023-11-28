@@ -11,9 +11,9 @@ import sharp from 'sharp';
 import type { AlertMessageType } from '$lib/types';
 
 import {
+	CaptionLengthEnum,
 	captionContextSchema,
 	type CaptionContextSchemaType,
-	type CaptionLengthEnum,
 	type CaptionToneEnum
 } from '$validations/captionContextSchema';
 
@@ -48,19 +48,26 @@ async function compressImage(imageBuffer: Buffer, imageType: keyof sharp.FormatE
 async function generateImageCaption({
 	imageBase64,
 	captionContext,
-	captionLength,
-	captionTone
+	captionTone,
+	captionLength = CaptionLengthEnum.Medium
 }: ImageCaptionRequest) {
 	const openai = new OpenAI({
 		apiKey: SECRET_OPENAI_API_KEY
 	});
 
-	const systemMessage = `
-	Generate a ${captionLength ? `${captionLength} length` : ''} Instagram caption ${
-		captionTone ? `with a ${captionTone} tone` : ''
-	} for the following image. And please do not wrap the caption in quotes. ${
-		captionContext ? `Context: ${captionContext}` : ''
-	}`;
+	// Build parts of the system message based on the presence of captionLength, captionTone, and captionContext
+	const lengthPart = `${captionLength} length`;
+	const tonePart = captionTone ? ` with a ${captionTone} tone` : '';
+	const contextPart = captionContext ? ` considering the context: '${captionContext}'` : '';
+
+	// Combine parts to form the full system message
+	const systemMessage = [
+		'Create an Instagram caption that is ',
+		lengthPart,
+		tonePart,
+		contextPart,
+		'. Please do not wrap the caption in quotes.'
+	].join('');
 
 	const response: OpenAI.Chat.ChatCompletion = await openai.chat.completions.create({
 		model: 'gpt-4-vision-preview',
