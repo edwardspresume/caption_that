@@ -21,9 +21,9 @@ import { imageValidationSchema, supportedImageTypes } from '$validations/imageVa
 
 type ImageCaptionRequest = {
 	imageBase64: string;
-	captionContext?: string;
-	captionLength?: CaptionLengthEnum;
-	captionTone?: CaptionToneEnum;
+	captionContext: string | undefined;
+	captionLength: CaptionLengthEnum | undefined;
+	captionTone: CaptionToneEnum | undefined;
 };
 
 async function compressImage(imageBuffer: Buffer, imageType: keyof sharp.FormatEnum) {
