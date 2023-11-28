@@ -30,6 +30,7 @@ export enum CaptionLengthEnum {
 
 export enum CaptionToneEnum {
 	Funny = 'funny',
+	Witty = 'witty',
 	Serious = 'serious',
 	Casual = 'casual',
 	Formal = 'formal',
