@@ -11,6 +11,7 @@ import { message, superValidate } from 'sveltekit-superforms/server';
 import type { AlertMessageType } from '$lib/types';
 
 import { logError } from '$lib/utils';
+
 import {
 	FeedbackValidationSchema,
 	type FeedbackValidationSchemaType
@@ -69,7 +70,7 @@ export const actions: Actions = {
 			await sendEmail({
 				from: SECRET_GMAIL_USERNAME,
 				to: SECRET_GMAIL_USERNAME,
-				subject: `Promptly Feedback`,
+				subject: `CaptionThat Feedback`,
 				html: `
                 <h2>New Feedback</h2>
                 <p>${sanitizedMessage}</p>
