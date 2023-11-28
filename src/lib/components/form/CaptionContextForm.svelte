@@ -7,7 +7,7 @@
 	import {
 		MAX_CAPTION_PROMPT_LENGTH,
 		captionContextSchema,
-		type CaptionContextSchema
+		type CaptionContextSchemaType
 	} from '$validations/captionContextSchema';
 	import { MAX_FILE_SIZE_MB, imageValidationSchema } from '$validations/imageValidationSchema';
 
@@ -17,7 +17,7 @@
 	import CaptionToneSelector from './CaptionToneSelector.svelte';
 
 	export let currentCaption = '';
-	export let captionContextForm: SuperValidated<CaptionContextSchema>;
+	export let captionContextForm: SuperValidated<CaptionContextSchemaType>;
 
 	let uploadedImageUrl: string | null = null;
 	let isImageUploadInProgress = false;

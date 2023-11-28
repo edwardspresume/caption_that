@@ -8,8 +8,8 @@ import { message, superValidate } from 'sveltekit-superforms/server';
 import { Buffer } from 'buffer';
 import sharp from 'sharp';
 
-import type { AlertMessage, CaptionLengthEnum, CaptionToneEnum } from '$lib/types';
-import { captionContextSchema } from '$validations/captionContextSchema';
+import type { AlertMessageType, CaptionLengthEnum, CaptionToneEnum } from '$lib/types';
+import { captionContextSchema, type CaptionContextSchemaType } from '$validations/captionContextSchema';
 import { imageValidationSchema, supportedImageTypes } from '$validations/imageValidationSchema';
 
 type ImageCaptionRequest = {
@@ -103,7 +103,7 @@ export const actions: Actions = {
 		const captionLength = formData.get('captionLength') as CaptionLengthEnum | undefined;
 		const captionTone = formData.get('captionTone') as CaptionToneEnum | undefined;
 
-		const captionContextForm = await superValidate<typeof captionContextSchema, AlertMessage>(
+		const captionContextForm = await superValidate<CaptionContextSchemaType, AlertMessageType>(
 			formData,
 			captionContextSchema
 		);

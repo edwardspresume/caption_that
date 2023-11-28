@@ -8,7 +8,7 @@ import { JSDOM } from 'jsdom';
 
 import { message, superValidate } from 'sveltekit-superforms/server';
 
-import type { AlertMessage } from '$lib/types';
+import type { AlertMessageType } from '$lib/types';
 
 import { logError } from '$lib/utils';
 import { FeedbackValidationSchema } from '$validations/feedbackValidationSchema';
@@ -46,7 +46,7 @@ async function sendEmail(mailOptions: object) {
 
 export const actions: Actions = {
 	default: async ({ request }) => {
-		const feedbackForm = await superValidate<typeof FeedbackValidationSchema, AlertMessage>(
+		const feedbackForm = await superValidate<typeof FeedbackValidationSchema, AlertMessageType>(
 			request,
 			FeedbackValidationSchema
 		);

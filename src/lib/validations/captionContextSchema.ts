@@ -22,4 +22,4 @@ export const captionContextSchema = z.object({
 		.optional()
 });
 
-export type CaptionContextSchema = typeof captionContextSchema;
+export type CaptionContextSchemaType = typeof captionContextSchema;
