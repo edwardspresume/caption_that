@@ -39,11 +39,9 @@ async function compressImage(imageBuffer: Buffer, imageType: keyof sharp.FormatE
 
 		return `data:image/${imageType};base64,${compressedImageBuffer.toString('base64')}`;
 	} catch (error) {
-		if (error instanceof Error) {
-			throw new Error('Image compression failed: ' + error.message);
-		} else {
-			throw new Error('Image compression failed');
-		}
+		throw new Error(
+			`Image compression failed: ${error instanceof Error ? error.message : 'unknown error'}`
+		);
 	}
 }
 
