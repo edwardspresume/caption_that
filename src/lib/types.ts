@@ -21,23 +21,6 @@ export type EnterKeyHintType =
 	| null
 	| undefined;
 
-export enum CaptionLengthEnum {
-	Short = 'short',
-	Medium = 'medium',
-	Long = 'long',
-	VeryLong = 'very-long'
-}
-
-export enum CaptionToneEnum {
-	Funny = 'funny',
-	Witty = 'witty',
-	Serious = 'serious',
-	Casual = 'casual',
-	Formal = 'formal',
-	Inspirational = 'inspirational',
-	Enthusiastic = 'enthusiastic',
-	Informative = 'informative'
-}
 
 // Type for prettifying an object type
 export type Prettify<T> = {

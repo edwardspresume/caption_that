@@ -8,8 +8,15 @@ import { message, superValidate } from 'sveltekit-superforms/server';
 import { Buffer } from 'buffer';
 import sharp from 'sharp';
 
-import type { AlertMessageType, CaptionLengthEnum, CaptionToneEnum } from '$lib/types';
-import { captionContextSchema, type CaptionContextSchemaType } from '$validations/captionContextSchema';
+import type { AlertMessageType } from '$lib/types';
+
+import {
+	captionContextSchema,
+	type CaptionContextSchemaType,
+	type CaptionLengthEnum,
+	type CaptionToneEnum
+} from '$validations/captionContextSchema';
+
 import { imageValidationSchema, supportedImageTypes } from '$validations/imageValidationSchema';
 
 type ImageCaptionRequest = {

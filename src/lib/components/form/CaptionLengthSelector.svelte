@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CaptionLengthEnum } from '$lib/types';
+	import { CaptionLengthEnum } from '$validations/captionContextSchema';
 
 	import Label from '$components/ui/label/label.svelte';
 	import * as Select from '$components/ui/select';

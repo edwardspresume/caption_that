@@ -1,6 +1,22 @@
 import { z } from 'zod';
 
-import { CaptionLengthEnum } from '$lib/types';
+export enum CaptionLengthEnum {
+	Short = 'short',
+	Medium = 'medium',
+	Long = 'long',
+	VeryLong = 'very-long'
+}
+
+export enum CaptionToneEnum {
+	Funny = 'funny',
+	Witty = 'witty',
+	Serious = 'serious',
+	Casual = 'casual',
+	Formal = 'formal',
+	Inspirational = 'inspirational',
+	Enthusiastic = 'enthusiastic',
+	Informative = 'informative'
+}
 
 export const MAX_CAPTION_PROMPT_LENGTH = 300;
 
