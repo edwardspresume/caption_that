@@ -26,6 +26,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Image Caption Generator | CaptionThat</title>
+	<meta
+		name="description"
+		content="CaptionThat is a web application that generates unique and descriptive captions for your images using OpenAI GPT-4 Vision"
+	/>
+</svelte:head>
+
 <div class="container max-w-xl p-2 pb-8">
 	<header class="mb-5 text-center">
 		<h1 class="flex items-center justify-center gap-1 mb-1 text-2xl font-bold">
