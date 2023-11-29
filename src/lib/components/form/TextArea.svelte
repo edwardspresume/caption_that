@@ -9,7 +9,7 @@
 
 	let className: HTMLTextareaAttributes['class'] = undefined;
 	export { className as class };
-	export let value: string = '';
+	export let value: string | undefined = '';
 	export let name: string = '';
 	export let label: string = '';
 	export let placeholder: string = '';
@@ -18,7 +18,7 @@
 	export let maxlength: number | undefined = undefined;
 	export let errorMessage: object | undefined = undefined;
 
-	$: valueLength = value.length;
+	$: valueLength = value?.length || 0;
 </script>
 
 <Label class="grid gap-2">

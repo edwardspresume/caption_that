@@ -26,14 +26,10 @@ export const captionContextSchema = z.object({
 
 	captionContext: z
 		.string()
-		.min(1, 'Prompt is required')
 		.max(
 			MAX_CAPTION_PROMPT_LENGTH,
 			`Prompt must be ${MAX_CAPTION_PROMPT_LENGTH} characters or less`
 		)
-		.refine((str: string) => str.trim().length > 0, {
-			message: `Prompt cannot be only empty spaces`
-		})
 		.transform((str: string) => str.trim())
 		.optional()
 });
