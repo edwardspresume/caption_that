@@ -24,8 +24,22 @@
 
 <ModeWatcher />
 
-<SiteMainHeader />
+<div class="flex flex-col h-[100vh]">
+	<SiteMainHeader />
 
-<main>
-	<slot />
-</main>
+	<main class="container flex-1 max-w-xl p-2 pb-10">
+		<slot />
+	</main>
+
+	<footer class="px-2 py-4 border-t">
+		<div class="container mx-auto">
+			<p class="text-center">
+				Created by <a
+					href="https://twitter.com/edwardspresume"
+					target="_blank"
+					class="text-blue-400 hover:text-blue-500">@edwardspresume</a
+				>
+			</p>
+		</div>
+	</footer>
+</div>
