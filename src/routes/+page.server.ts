@@ -112,9 +112,6 @@ export const actions: Actions = {
 		const formData = await request.formData();
 
 		const imageFile = formData.get('uploadedImage') as File | undefined;
-		const captionContext = formData.get('captionContext') as string | undefined;
-		const captionLength = formData.get('captionLength') as CaptionLengthEnum | undefined;
-		const captionTone = formData.get('captionTone') as CaptionToneEnum | undefined;
 
 		const captionContextForm = await superValidate<CaptionContextSchemaType, AlertMessageType>(
 			formData,
@@ -147,9 +144,9 @@ export const actions: Actions = {
 
 			const generatedCaption = await generateImageCaption({
 				imageBase64: base64Image,
-				captionContext,
-				captionLength,
-				captionTone
+				captionContext: captionContextForm.data.captionContext,
+				captionTone: captionContextForm.data.captionTone,
+				captionLength: captionContextForm.data.captionLength
 			});
 
 			return message(captionContextForm, {

@@ -1,16 +1,27 @@
 <script lang="ts">
+	import { toast } from 'svelte-sonner';
+
 	import { CaptionLengthEnum } from '$validations/captionContextSchema';
 
 	import Label from '$components/ui/label/label.svelte';
 	import * as Select from '$components/ui/select';
 
+	export let value: string | undefined;
+	export let errorMessage: string[] | undefined;
+
 	const captionLengthOptions = Object.values(CaptionLengthEnum);
+
+	$: if (errorMessage) toast.error(errorMessage.join(' '));
 </script>
 
 <fieldset class="grid w-full gap-2">
 	<Label for="lengthSelector" class="text-xs sm:text-sm">Length (optional)</Label>
 
-	<Select.Root portal={null}>
+	<Select.Root
+		portal={null}
+		onSelectedChange={(selected) =>
+			(value = typeof selected?.value === 'string' ? selected.value : undefined)}
+	>
 		<Select.Trigger class="w-full" id="lengthSelector">
 			<Select.Value placeholder="Select caption length" />
 		</Select.Trigger>

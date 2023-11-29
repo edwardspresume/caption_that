@@ -1,16 +1,27 @@
 <script lang="ts">
+	import { toast } from 'svelte-sonner';
+
 	import { CaptionToneEnum } from '$validations/captionContextSchema';
 
 	import Label from '$components/ui/label/label.svelte';
 	import * as Select from '$components/ui/select';
 
+	export let value: string | undefined;
+	export let errorMessage: string[] | undefined;
+
 	const captionToneOptions = Object.values(CaptionToneEnum);
+
+	$: if (errorMessage) toast.error(errorMessage.join(' '));
 </script>
 
 <fieldset class="grid w-full gap-2">
 	<Label for="toneSelector" class="text-xs sm:text-sm">Tone (optional)</Label>
 
-	<Select.Root portal={null}>
+	<Select.Root
+		portal={null}
+		onSelectedChange={(selected) =>
+			(value = typeof selected?.value === 'string' ? selected.value : undefined)}
+	>
 		<Select.Trigger class="w-full" id="toneSelector">
 			<Select.Value placeholder="Select caption tone" />
 		</Select.Trigger>

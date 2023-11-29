@@ -120,9 +120,9 @@
 	</label>
 
 	<div class="flex flex-col gap-8 sm:flex-row">
-		<CaptionToneSelector />
+		<CaptionToneSelector bind:value={$form.captionTone} errorMessage={$errors.captionTone} />
 
-		<CaptionLengthSelector />
+		<CaptionLengthSelector bind:value={$form.captionLength} errorMessage={$errors.captionLength} />
 	</div>
 
 	<TextArea

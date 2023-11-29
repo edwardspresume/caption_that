@@ -1,12 +1,5 @@
 import { z } from 'zod';
 
-export enum CaptionLengthEnum {
-	Short = 'short',
-	Medium = 'medium',
-	Long = 'long',
-	VeryLong = 'very-long'
-}
-
 export enum CaptionToneEnum {
 	Funny = 'funny',
 	Witty = 'witty',
@@ -18,11 +11,18 @@ export enum CaptionToneEnum {
 	Informative = 'informative'
 }
 
+export enum CaptionLengthEnum {
+	Short = 'short',
+	Medium = 'medium',
+	Long = 'long',
+	VeryLong = 'very-long'
+}
+
 export const MAX_CAPTION_PROMPT_LENGTH = 300;
 
 export const captionContextSchema = z.object({
+	captionTone: z.nativeEnum(CaptionToneEnum).optional(),
 	captionLength: z.nativeEnum(CaptionLengthEnum).optional(),
-	captionTone: z.nativeEnum(CaptionLengthEnum).optional(),
 
 	captionContext: z
 		.string()
