@@ -8,6 +8,8 @@ import { message, superValidate } from 'sveltekit-superforms/server';
 import { Buffer } from 'buffer';
 import sharp from 'sharp';
 
+import { logError } from '$lib/utils';
+
 import type { AlertMessageType } from '$lib/types';
 
 import {
@@ -155,7 +157,7 @@ export const actions: Actions = {
 				alertText: generatedCaption
 			});
 		} catch (error) {
-			console.error('Error analyzing image:', error);
+			logError(error, 'Error analyzing image');
 
 			return message(
 				captionContextForm,

@@ -103,20 +103,20 @@
 			/>
 		{:else}
 			<iconify-icon icon="flat-color-icons:add-image" class="text-5xl"></iconify-icon>
+
+			<p>
+				Upload image or drag and drop
+
+				<span class="text-sm text-muted-foreground">
+					(Max file size: {MAX_FILE_SIZE_MB}MB)
+				</span>
+			</p>
+
+			<p class="text-muted-foreground">
+				<span class="font-semibold">Privacy Notice:</span> We respect your privacy. Images uploaded are
+				not saved on our servers and are only used for caption generation.
+			</p>
 		{/if}
-
-		<p>
-			Upload image or drag and drop
-
-			<span class="text-sm text-muted-foreground">
-				(Max file size: {MAX_FILE_SIZE_MB}MB)
-			</span>
-		</p>
-
-		<p class="text-muted-foreground">
-			<span class="font-semibold">Privacy Notice:</span> We respect your privacy. Images uploaded are
-			not saved on our servers and are only used for caption generation.
-		</p>
 	</label>
 
 	<div class="flex flex-col gap-8 sm:flex-row">
