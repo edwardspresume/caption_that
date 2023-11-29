@@ -33,7 +33,7 @@
 
 	<footer class="px-2 py-3 border-t">
 		<div class="container mx-auto">
-			<p class="text-center">
+			<p class="text-sm text-center">
 				Created by <a
 					href="https://twitter.com/edwardspresume"
 					target="_blank"
