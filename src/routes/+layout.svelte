@@ -31,7 +31,7 @@
 		<slot />
 	</main>
 
-	<footer class="px-2 py-4 border-t">
+	<footer class="px-2 py-3 border-t">
 		<div class="container mx-auto">
 			<p class="text-center">
 				Created by <a
