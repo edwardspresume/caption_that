@@ -9,6 +9,11 @@
 
 	let currentCaption = '';
 	let captionCopied = false;
+	let captionSectionRef: HTMLElement;
+
+	$: if (currentCaption && captionSectionRef) {
+		captionSectionRef.scrollIntoView();
+	}
 
 	function copyCaptionClipboard() {
 		navigator.clipboard.writeText(currentCaption);
@@ -35,7 +40,7 @@
 	<CaptionContextForm captionContextForm={data.captionContextForm} bind:currentCaption />
 
 	{#if currentCaption}
-		<section class="p-4 mt-10 border rounded-md" aria-live="polite">
+		<section class="p-4 mt-10 border rounded-md" aria-live="polite" bind:this={captionSectionRef}>
 			<div class="flex items-center justify-between mb-5">
 				<h2 class="text-xl font-bold">Caption</h2>
 
