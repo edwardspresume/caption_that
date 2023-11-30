@@ -57,8 +57,6 @@ async function generateImageCaption({
 		apiKey: SECRET_OPENAI_API_KEY
 	});
 
-	// Use
-
 	// Build parts of the system message based on the presence of captionLength, captionTone, and captionContext
 	const lengthPart = `${captionLength} length`;
 	const tonePart = captionTone ? ` with a ${captionTone} tone` : '';
