@@ -48,6 +48,7 @@
 		accept="image/*"
 		name="uploadedImage"
 		class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+		data-testid="file-drop-zone-input"
 		on:change={handleImageUpload}
 	/>
 
