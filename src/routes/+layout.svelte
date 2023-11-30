@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { LayoutData } from './$types';
-
 	import { dev } from '$app/environment';
 	import { inject } from '@vercel/analytics';
 
@@ -12,8 +10,6 @@
 	import { ModeWatcher } from 'mode-watcher';
 
 	import SiteMainHeader from '$components/siteMainHeader/SiteMainHeader.svelte';
-
-	export let data: LayoutData;
 
 	inject({ mode: dev ? 'development' : 'production' });
 </script>
