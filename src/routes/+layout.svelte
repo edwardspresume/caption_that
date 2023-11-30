@@ -33,7 +33,7 @@
 				Created by <a
 					href="https://twitter.com/edwardspresume"
 					target="_blank"
-					class="text-blue-400 hover:underline hover:text-blue-500">@edwardspresume</a
+					class="italic text-blue-400 hover:underline hover:text-blue-500">Edwards Presume</a
 				>
 			</p>
 		</div>
