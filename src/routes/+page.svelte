@@ -1,22 +1,23 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
+	import { currentCaption } from '$lib/store';
+
 	import StarredTitle from '$components/StarredTitle.svelte';
 	import CaptionContextForm from '$components/form/CaptionContextForm.svelte';
 	import Button from '$components/ui/button/button.svelte';
 
 	export let data: PageData;
 
-	let currentCaption = '';
 	let captionCopied = false;
 	let captionSectionRef: HTMLElement;
 
-	$: if (currentCaption && captionSectionRef) {
+	$: if ($currentCaption && captionSectionRef) {
 		captionSectionRef.scrollIntoView();
 	}
 
 	function copyCaptionClipboard() {
-		navigator.clipboard.writeText(currentCaption);
+		navigator.clipboard.writeText($currentCaption);
 
 		captionCopied = true;
 
@@ -42,9 +43,9 @@
 	<p class="text-muted-foreground">Upload your image to receive a unique and descriptive caption</p>
 </header>
 
-<CaptionContextForm captionContextForm={data.captionContextForm} bind:currentCaption />
+<CaptionContextForm captionContextForm={data.captionContextForm} />
 
-{#if currentCaption}
+{#if $currentCaption}
 	<section class="p-4 mt-10 border rounded-md" aria-live="polite" bind:this={captionSectionRef}>
 		<div class="flex items-center justify-between mb-5">
 			<h2 class="text-xl font-bold">Caption</h2>
@@ -60,7 +61,7 @@
 		</div>
 
 		<p class="p-3 bg-accent rounded-md max-h-[400px] shadow-md overflow-hidden overflow-y-auto">
-			{currentCaption}
+			{$currentCaption}
 		</p>
 	</section>
 {/if}
