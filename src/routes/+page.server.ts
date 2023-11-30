@@ -58,7 +58,6 @@ async function generateImageCaption({
 	});
 
 	// Use
-	return `the context is: ${captionContext}`;
 
 	// Build parts of the system message based on the presence of captionLength, captionTone, and captionContext
 	const lengthPart = `${captionLength} length`;
