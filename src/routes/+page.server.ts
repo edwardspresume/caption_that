@@ -8,7 +8,7 @@ import { message, superValidate } from 'sveltekit-superforms/server';
 import { Buffer } from 'buffer';
 import sharp from 'sharp';
 
-import { logError } from '$lib/utils';
+import { logError, sanitizeContent } from '$lib/utils';
 
 import type { AlertMessageType } from '$lib/types';
 
@@ -56,6 +56,9 @@ async function generateImageCaption({
 	const openai = new OpenAI({
 		apiKey: SECRET_OPENAI_API_KEY
 	});
+
+	// Use
+	return `the context is: ${captionContext}`;
 
 	// Build parts of the system message based on the presence of captionLength, captionTone, and captionContext
 	const lengthPart = `${captionLength} length`;
@@ -144,7 +147,7 @@ export const actions: Actions = {
 
 			const generatedCaption = await generateImageCaption({
 				imageBase64: base64Image,
-				captionContext: captionContextForm.data.captionContext,
+				captionContext: sanitizeContent(captionContextForm.data.captionContext),
 				captionTone: captionContextForm.data.captionTone,
 				captionLength: captionContextForm.data.captionLength
 			});

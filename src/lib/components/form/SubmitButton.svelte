@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 
-	import { cn } from '$lib/utils';
+	import { cn } from '$lib/utils/shadCNUtils';
 
 	import Button from '$components/ui/button/button.svelte';
 

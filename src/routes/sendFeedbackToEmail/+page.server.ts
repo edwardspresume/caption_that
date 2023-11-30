@@ -3,24 +3,16 @@ import type { Actions } from './$types';
 
 import nodemailer from 'nodemailer';
 
-import DOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
-
 import { message, superValidate } from 'sveltekit-superforms/server';
 
 import type { AlertMessageType } from '$lib/types';
 
-import { logError } from '$lib/utils';
+import { logError, sanitizeContent } from '$lib/utils';
 
 import {
 	FeedbackValidationSchema,
 	type FeedbackValidationSchemaType
 } from '$validations/feedbackValidationSchema';
-
-const window = new JSDOM('').window;
-const DOMPurifyInstance = DOMPurify(window);
-
-const sanitizeContentOnServer = DOMPurifyInstance.sanitize;
 
 /**
  * Creates a nodemailer Transporter instance
@@ -64,7 +56,7 @@ export const actions: Actions = {
 
 		const { message: feedbackMessage } = feedbackForm.data;
 
-		const sanitizedMessage = sanitizeContentOnServer(feedbackMessage);
+		const sanitizedMessage = sanitizeContent(feedbackMessage);
 
 		try {
 			await sendEmail({

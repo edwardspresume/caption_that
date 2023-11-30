@@ -2,7 +2,7 @@
 	import type { HTMLTextareaAttributes } from 'svelte/elements';
 
 	import type { EnterKeyHintType } from '$lib/types';
-	import { cn } from '$lib/utils';
+	import { cn } from '$lib/utils/shadCNUtils';
 
 	import Label from '$components/ui/label/label.svelte';
 	import Textarea from '$components/ui/textarea/textarea.svelte';

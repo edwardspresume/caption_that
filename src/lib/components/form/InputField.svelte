@@ -2,7 +2,7 @@
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
 	import type { EnterKeyHintType } from '$lib/types';
-	import { cn } from '$lib/utils';
+	import { cn } from '$lib/utils/shadCNUtils';
 
 	let className: HTMLInputAttributes['class'] = undefined;
 	export { className as class };
