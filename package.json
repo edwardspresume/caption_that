@@ -71,6 +71,7 @@
 		"sharp": "^0.32.6",
 		"svelte-sonner": "^0.3.6",
 		"tailwind-merge": "^2.2.0",
-		"tailwind-variants": "^0.1.19"
+		"tailwind-variants": "^0.1.19",
+		"vite-plugin-kit-routes": "^0.2.12"
 	}
 }
