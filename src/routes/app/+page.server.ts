@@ -103,7 +103,7 @@ async function generateImageCaption({
 
 export const load: PageServerLoad = async () => {
 	return {
-		captionContextForm: superValidate(captionContextSchema)
+		captionContextForm: await superValidate(captionContextSchema)
 	};
 };
 
