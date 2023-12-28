@@ -23,9 +23,7 @@
 <div class="flex flex-col h-[100vh]">
 	<SiteMainHeader />
 
-	<main class="container flex-1 max-w-xl p-2 pb-10">
-		<slot />
-	</main>
+	<slot />
 
 	<footer class="px-2 py-3 border-t">
 		<div class="container mx-auto">
