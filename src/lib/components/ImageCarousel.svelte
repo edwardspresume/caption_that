@@ -26,32 +26,38 @@
 		{
 			mobile_src: image_1_mobile,
 			desktop_src: image_1_desktop,
-			caption: 'caption 1'
+			caption:
+				'Taking a moment to simply embrace the views and the company of good friends. 🏞️💕 #AdventureSquad #NaturePause #MountainViews'
 		},
 		{
 			mobile_src: image_2_mobile,
 			desktop_src: image_2_desktop,
-			caption: 'caption 2'
+			caption:
+				"Embracing the city lights and feeling the evening breeze. There's nothing like rooftop vibes to end the day on a high note."
 		},
 		{
 			mobile_src: image_3_mobile,
 			desktop_src: image_3_desktop,
-			caption: 'caption 3'
+			caption:
+				"Sipping on sunshine and laughter with my favorite humans – who needs filters when your squad's this colorful? 🍻🌈 #NoFilterNoProblem #WhoLetUsOutInTheWild"
 		},
 		{
 			mobile_src: image_4_mobile,
 			desktop_src: image_4_desktop,
-			caption: 'caption 4'
+			caption:
+				'Embracing the calm of a minimalist balcony setup. Green touches and soft lights for those serene evenings 💡🌿🛋️ #BalconyGoals #MinimalistLiving #UrbanOasis'
 		},
 		{
 			mobile_src: image_5_mobile,
 			desktop_src: image_5_desktop,
-			caption: 'caption 5'
+			caption:
+				'Chasing sunsets with the best crew. #GoldenHourAdventures #FriendshipGoals #MountainVibes'
 		},
 		{
 			mobile_src: image_6_mobile,
 			desktop_src: image_6_desktop,
-			caption: 'caption 6'
+			caption:
+				'Embracing the quiet majesty of the sunset, one finds clarity at the horizon where thoughts align with the fading light. #sunsetcontemplation #horizonthoughts #peacefulmoments'
 		}
 	];
 
@@ -99,7 +105,9 @@
 			{/each}
 		</div>
 
-		<figcaption class="p-2 mx-auto mt-4 italic font-medium text-center rounded bg-accent w-fit">
+		<figcaption
+			class="p-2 mx-auto mt-4 italic font-medium text-center rounded bg-accent w-fit text-pretty"
+		>
 			{images[$currentImageIndex]?.caption}
 		</figcaption>
 	</figure>
