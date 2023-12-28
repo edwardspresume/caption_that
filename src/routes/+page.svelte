@@ -18,7 +18,5 @@
 		<Button href={route('/app')}>Try it out for free</Button>
 	</section>
 
-	<section>
-		<ImageSlider />
-	</section>
+	<ImageSlider />
 </header>
