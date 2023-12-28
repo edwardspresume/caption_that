@@ -9,7 +9,7 @@
 
 <main class="container flex-1 p-2 pb-14 space-y-14 md:-mt-5">
 	<header
-		class="space-y-6 md:grid md:grid-cols-[1fr,1.7fr] md:gap-8 md:justify-between md:items-center md:justify-items-end sm:h-[80dvh]"
+		class="space-y-6 md:grid md:grid-cols-[1fr,1.7fr] md:gap-8 md:justify-between md:items-center md:justify-items-end sm:h-[100dvh]"
 	>
 		<section class="space-y-6 text-center md:text-left text-pretty">
 			<h1 class="text-2xl font-bold">CaptionThat - Unleash Your Creativity</h1>
@@ -62,4 +62,6 @@
 	<section class="grid justify-center p-10 mt-52 bg-accent">
 		<Button class="w-fit" href={route('/app')}>Try it out for free</Button>
 	</section>
+
+
 </main>
