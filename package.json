@@ -27,7 +27,7 @@
 		"@sveltejs/enhanced-img": "^0.1.7",
 		"@sveltejs/kit": "^2.0.6",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
-		"@testing-library/jest-dom": "^6.1.5",
+		"@testing-library/jest-dom": "^6.1.6",
 		"@testing-library/svelte": "^4.0.5",
 		"@total-typescript/ts-reset": "^0.5.1",
 		"@types/cookie": "^0.5.4",
@@ -69,7 +69,7 @@
 		"openai": "^4.24.1",
 		"postcss-preset-env": "^9.3.0",
 		"sharp": "^0.32.6",
-		"svelte-sonner": "^0.3.6",
+		"svelte-sonner": "^0.3.7",
 		"tailwind-merge": "^2.2.0",
 		"tailwind-variants": "^0.1.19",
 		"vite-plugin-kit-routes": "^0.2.12"
