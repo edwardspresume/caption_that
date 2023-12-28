@@ -9,18 +9,18 @@
 		caption: string;
 	};
 
-	import image_1_desktop from '$lib/assets/1_desktop.jpg';
-	import image_1_mobile from '$lib/assets/1_mobile.jpg';
-	import image_2_desktop from '$lib/assets/2_desktop.jpg';
-	import image_2_mobile from '$lib/assets/2_mobile.jpg';
-	import image_3_desktop from '$lib/assets/3_desktop.jpg';
-	import image_3_mobile from '$lib/assets/3_mobile.jpg';
-	import image_4_desktop from '$lib/assets/4_desktop.jpg';
-	import image_4_mobile from '$lib/assets/4_mobile.jpg';
-	import image_5_desktop from '$lib/assets/5_desktop.jpg';
-	import image_5_mobile from '$lib/assets/5_mobile.jpg';
-	import image_6_desktop from '$lib/assets/6_desktop.jpg';
-	import image_6_mobile from '$lib/assets/6_mobile.jpg';
+	import image_1_desktop from '$lib/assets/slider_images/1_desktop.jpg';
+	import image_1_mobile from '$lib/assets/slider_images/1_mobile.jpg';
+	import image_2_desktop from '$lib/assets/slider_images/2_desktop.jpg';
+	import image_2_mobile from '$lib/assets/slider_images/2_mobile.jpg';
+	import image_3_desktop from '$lib/assets/slider_images/3_desktop.jpg';
+	import image_3_mobile from '$lib/assets/slider_images/3_mobile.jpg';
+	import image_4_desktop from '$lib/assets/slider_images/4_desktop.jpg';
+	import image_4_mobile from '$lib/assets/slider_images/4_mobile.jpg';
+	import image_5_desktop from '$lib/assets/slider_images/5_desktop.jpg';
+	import image_5_mobile from '$lib/assets/slider_images/5_mobile.jpg';
+	import image_6_desktop from '$lib/assets/slider_images/6_desktop.jpg';
+	import image_6_mobile from '$lib/assets/slider_images/6_mobile.jpg';
 
 	const images: Image[] = [
 		{
@@ -82,7 +82,7 @@
 
 {#if images.length > 0}
 	<figure class="w-full">
-		<div class="relative aspect-[16/9]">
+		<div class="relative aspect-[16/12]">
 			{#each [images[$currentImageIndex]] as image (image?.mobile_src)}
 				<picture>
 					<source media="(min-width: 768px)" srcset={image?.desktop_src} />
