@@ -1,42 +1,106 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
-	import image1 from '$lib/assets/1.jpg';
-	import image2 from '$lib/assets/2.jpg';
-	import image3 from '$lib/assets/3.jpg';
+	import { onDestroy, onMount } from 'svelte';
+	import { writable } from 'svelte/store';
+	import { fade } from 'svelte/transition';
 
 	type Image = {
-		src: string;
+		mobile_src: string;
+		desktop_src: string;
 		caption: string;
 	};
 
+	import image_1_desktop from '$lib/assets/1_desktop.jpg';
+	import image_1_mobile from '$lib/assets/1_mobile.jpg';
+	import image_2_desktop from '$lib/assets/2_desktop.jpg';
+	import image_2_mobile from '$lib/assets/2_mobile.jpg';
+	import image_3_desktop from '$lib/assets/3_desktop.jpg';
+	import image_3_mobile from '$lib/assets/3_mobile.jpg';
+	import image_4_desktop from '$lib/assets/4_desktop.jpg';
+	import image_4_mobile from '$lib/assets/4_mobile.jpg';
+	import image_5_desktop from '$lib/assets/5_desktop.jpg';
+	import image_5_mobile from '$lib/assets/5_mobile.jpg';
+	import image_6_desktop from '$lib/assets/6_desktop.jpg';
+	import image_6_mobile from '$lib/assets/6_mobile.jpg';
+
 	const images: Image[] = [
-		{ src: image1, caption: 'Caption for image 1' },
-		{ src: image2, caption: 'Caption for image 2' },
-		{ src: image3, caption: 'Caption for image 3' }
+		{
+			mobile_src: image_1_mobile,
+			desktop_src: image_1_desktop,
+			caption: 'caption 1'
+		},
+		{
+			mobile_src: image_2_mobile,
+			desktop_src: image_2_desktop,
+			caption: 'caption 2'
+		},
+		{
+			mobile_src: image_3_mobile,
+			desktop_src: image_3_desktop,
+			caption: 'caption 3'
+		},
+		{
+			mobile_src: image_4_mobile,
+			desktop_src: image_4_desktop,
+			caption: 'caption 4'
+		},
+		{
+			mobile_src: image_5_mobile,
+			desktop_src: image_5_desktop,
+			caption: 'caption 5'
+		},
+		{
+			mobile_src: image_6_mobile,
+			desktop_src: image_6_desktop,
+			caption: 'caption 6'
+		}
 	];
 
-	let currentIndex = 0;
+	const INTERVAL_TIME = 3000;
+	const currentImageIndex = writable(0);
 
-	onMount(() => {
-		const interval = setInterval(() => {
-			currentIndex = (currentIndex + 1) % images.length;
-		}, 4000);
+	let interval: ReturnType<typeof setInterval>;
 
-		return () => {
-			clearInterval(interval);
-		};
-	});
+	const updateImage = () => {
+		$currentImageIndex = ($currentImageIndex + 1) % images.length;
+	};
+
+	const startInterval = () => {
+		interval = setInterval(updateImage, INTERVAL_TIME);
+	};
+
+	const clearExistingInterval = () => {
+		if (interval) clearInterval(interval);
+	};
+
+	onMount(startInterval);
+	onDestroy(clearExistingInterval);
+
+	const toggleInterval = (shouldPause: boolean) => {
+		shouldPause ? clearExistingInterval() : startInterval();
+	};
 </script>
 
-<figure>
-	<img
-		src={images?.[currentIndex]?.src}
-		alt={images?.[currentIndex]?.caption}
-		class="object-cover rounded-md w-[900px] h-[700px]"
-	/>
+{#if images.length > 0}
+	<figure class="w-full">
+		<div class="relative aspect-[16/9]">
+			{#each [images[$currentImageIndex]] as image (image?.mobile_src)}
+				<picture>
+					<source media="(min-width: 768px)" srcset={image?.desktop_src} />
+					<source media="(max-width: 767px)" srcset={image?.mobile_src} />
+					<img
+						src={image?.mobile_src}
+						alt={image?.caption}
+						transition:fade={{ duration: 800 }}
+						on:mouseenter={() => toggleInterval(true)}
+						on:mouseleave={() => toggleInterval(false)}
+						class="absolute object-cover w-full h-full duration-300 border-4 rounded-md shadow-md hover:border-foreground"
+					/>
+				</picture>
+			{/each}
+		</div>
 
-	<figcaption class="block p-2 mx-auto mt-4 italic font-medium text-center rounded bg-accent w-fit">
-		{images?.[currentIndex]?.caption}
-	</figcaption>
-</figure>
+		<figcaption class="p-2 mx-auto mt-4 italic font-medium text-center rounded bg-accent w-fit">
+			{images[$currentImageIndex]?.caption}
+		</figcaption>
+	</figure>
+{/if}
