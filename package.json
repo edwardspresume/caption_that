@@ -68,7 +68,7 @@
     "nodemailer": "^6.9.7",
     "openai": "^4.24.1",
     "postcss-preset-env": "^9.3.0",
-    "sharp": "^0.33.1",
+    "sharp": "^0.32.6",
     "svelte-sonner": "^0.3.7",
     "tailwind-merge": "^2.2.0",
     "tailwind-variants": "^0.1.19",
