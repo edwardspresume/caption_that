@@ -61,7 +61,7 @@
 			<Accordion.Item value={`item-${i + 1}`}>
 				<Accordion.Trigger>{question}</Accordion.Trigger>
 				<Accordion.Content>
-					{@html answer}
+					{answer}
 				</Accordion.Content>
 			</Accordion.Item>
 		{/each}
