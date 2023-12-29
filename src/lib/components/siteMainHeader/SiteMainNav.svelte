@@ -27,6 +27,13 @@
 		className
 	)}
 >
-	<Button variant="outline" href={route('/')}>Home</Button>
-	<Button variant="outline" href={route('/app')}>App</Button>
+	<ul class="grid gap-2 sm:flex">
+		<li>
+			<Button variant="outline" class="w-full" href={route('/')}>Home</Button>
+		</li>
+
+		<li>
+			<Button variant="outline" class="w-full" href={route('/app')}>App</Button>
+		</li>
+	</ul>
 </nav>
