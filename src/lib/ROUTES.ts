@@ -10,7 +10,7 @@
  */
 const PAGES = {
   "/": `/`,
-  "/app": `/app`
+  "/dashboard": `/dashboard`
 }
 
 /**
@@ -24,7 +24,7 @@ const SERVERS = {
  * ACTIONS
  */
 const ACTIONS = {
-  "default /app": `/app`,
+  "default /dashboard": `/dashboard`,
   "default /sendFeedbackToEmail": `/sendFeedbackToEmail`
 }
 
@@ -111,9 +111,9 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = { 
-  PAGES: { '/': never, '/app': never }
+  PAGES: { '/': never, '/dashboard': never }
   SERVERS: Record<string, never>
-  ACTIONS: { 'default /app': never, 'default /sendFeedbackToEmail': never }
+  ACTIONS: { 'default /dashboard': never, 'default /sendFeedbackToEmail': never }
   LINKS: Record<string, never>
   Params: Record<string, never>
 }
