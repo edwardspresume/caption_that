@@ -26,7 +26,7 @@
 				Create stunning captions for your photos with CaptionThat. Let our AI do the work for you!
 			</p>
 
-			<Button href={route('/dashboard')}>Try it out for free</Button>
+			<Button href={route('/app')}>Try it out for free</Button>
 		</section>
 
 		<ImageCarousel />
@@ -60,6 +60,6 @@
 	</section>
 
 	<section class="grid justify-center p-10 mt-52 bg-accent">
-		<Button class="w-fit" href={route('/dashboard')}>Try it out for free</Button>
+		<Button class="w-fit" href={route('/app')}>Try it out for free</Button>
 	</section>
 </main>
