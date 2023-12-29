@@ -4,6 +4,7 @@
 	import StarredTitle from '$components/appPage/StarredTitle.svelte';
 	import FeedbackForm from '$components/appPage/form/FeedbackForm.svelte';
 	import Button from '$components/ui/button/button.svelte';
+	import SiteMainNav from './SiteMainNav.svelte';
 	import ThemeToggler from './ThemeToggler.svelte';
 </script>
 
@@ -16,6 +17,7 @@
 		<div class="flex gap-2">
 			<FeedbackForm />
 			<ThemeToggler />
+			<SiteMainNav class="order-first" />
 		</div>
 	</div>
 </header>
