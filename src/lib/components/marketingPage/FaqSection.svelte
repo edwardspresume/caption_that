@@ -15,7 +15,7 @@
 			</Accordion.Content>
 		</Accordion.Item>
 
-		<Accordion.Item value="item-2">
+		<Accordion.Item value="item-2" class="text-left">
 			<Accordion.Trigger>Is there a cost associated with using CaptionThat?</Accordion.Trigger>
 			<Accordion.Content>
 				No, at the moment CaptionThat is completely free to use. We may introduce a paid tier in the
@@ -66,3 +66,9 @@
 		</Accordion.Item>
 	</Accordion.Root>
 </section>
+
+<style>
+	section :global(button) {
+		@apply text-left;
+	}
+</style>
