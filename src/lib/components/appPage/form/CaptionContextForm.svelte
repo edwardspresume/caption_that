@@ -12,9 +12,9 @@
 		type CaptionContextSchemaType
 	} from '$validations/captionContextSchema';
 
-	import CaptionLengthSelector from '$components/form/CaptionLengthSelector.svelte';
-	import SubmitButton from '$components/form/SubmitButton.svelte';
-	import TextArea from '$components/form/TextArea.svelte';
+	import CaptionLengthSelector from '$components/appPage/form/CaptionLengthSelector.svelte';
+	import SubmitButton from '$components/appPage/form/SubmitButton.svelte';
+	import TextArea from '$components/appPage/form/TextArea.svelte';
 	import CaptionToneSelector from './CaptionToneSelector.svelte';
 	import FileDropZone from './FileDropZone.svelte';
 

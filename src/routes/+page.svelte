@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { route } from '$lib/ROUTES';
 
-	import ImageCarousel from '$components/ImageCarousel.svelte';
+	import ImageCarousel from '$components/marketingPage/ImageCarousel.svelte';
 	import Button from '$components/ui/button/button.svelte';
 
+	import FaqSection from '$components/marketingPage/FaqSection.svelte';
+	import H2 from '$components/marketingPage/H2.svelte';
 	import demoVideo from '$lib/assets/demo_video.mp4';
 </script>
 
@@ -33,7 +35,7 @@
 	</header>
 
 	<section>
-		<h2 class="mb-6 text-2xl font-bold text-center">How it works</h2>
+		<H2>How it works</H2>
 
 		<div class="space-y-6 md:grid md:grid-cols-[2fr,1fr] md:gap-8 md:items-center">
 			<div class="order-2 space-y-3 md:text-xl">
@@ -59,7 +61,9 @@
 		</div>
 	</section>
 
-	<section class="grid justify-center p-10 mt-52 bg-accent">
+	<FaqSection />
+
+	<section class="grid justify-center">
 		<Button class="w-fit" href={route('/app')}>Try it out for free</Button>
 	</section>
 </main>

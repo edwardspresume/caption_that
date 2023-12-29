@@ -5,7 +5,7 @@ import { fireEvent, render, waitFor } from '@testing-library/svelte';
 
 import { toast } from 'svelte-sonner';
 
-import FileDropZone from '$components/form/FileDropZone.svelte';
+import FileDropZone from '$components/appPage/form/FileDropZone.svelte';
 import { currentCaption } from '$lib/store';
 import {
 	IMAGE_VALIDATION_ERROR_MESSAGES,

@@ -3,8 +3,8 @@
 
 	import { currentCaption } from '$lib/store';
 
-	import StarredTitle from '$components/StarredTitle.svelte';
-	import CaptionContextForm from '$components/form/CaptionContextForm.svelte';
+	import StarredTitle from '$components/appPage/StarredTitle.svelte';
+	import CaptionContextForm from '$components/appPage/form/CaptionContextForm.svelte';
 	import Button from '$components/ui/button/button.svelte';
 
 	export let data: PageData;

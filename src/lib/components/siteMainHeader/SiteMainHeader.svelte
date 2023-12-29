@@ -1,8 +1,8 @@
 <script>
 	import { Routes } from '$lib/navLinks';
 
-	import StarredTitle from '$components/StarredTitle.svelte';
-	import FeedbackForm from '$components/form/FeedbackForm.svelte';
+	import StarredTitle from '$components/appPage/StarredTitle.svelte';
+	import FeedbackForm from '$components/appPage/form/FeedbackForm.svelte';
 	import Button from '$components/ui/button/button.svelte';
 	import ThemeToggler from './ThemeToggler.svelte';
 </script>
