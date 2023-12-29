@@ -6,7 +6,7 @@
 <section>
 	<H2>Frequently asked questions</H2>
 
-	<Accordion.Root class="w-full">
+	<Accordion.Root>
 		<Accordion.Item value="item-1">
 			<Accordion.Trigger>What is CaptionThat?</Accordion.Trigger>
 			<Accordion.Content>
@@ -43,9 +43,10 @@
 		</Accordion.Item>
 
 		<Accordion.Item value="item-5">
-			<Accordion.Trigger
-				>What steps can I take if a generated caption isn't quite right for my image?</Accordion.Trigger
-			>
+			<Accordion.Trigger>
+				What steps can I take if a generated caption isn't quite right for my image?
+			</Accordion.Trigger>
+
 			<Accordion.Content>
 				If the caption doesn't seem to align with your image, consider the following options: First,
 				you can adjust the 'Tone' and 'Context' fields to provide more specific guidance to the AI.
