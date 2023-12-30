@@ -17,8 +17,6 @@
 	import image_3_mobile from '$lib/assets/slider_images/3_mobile.jpg';
 	import image_4_desktop from '$lib/assets/slider_images/4_desktop.jpg';
 	import image_4_mobile from '$lib/assets/slider_images/4_mobile.jpg';
-	import image_5_desktop from '$lib/assets/slider_images/5_desktop.jpg';
-	import image_5_mobile from '$lib/assets/slider_images/5_mobile.jpg';
 	import image_6_desktop from '$lib/assets/slider_images/6_desktop.jpg';
 	import image_6_mobile from '$lib/assets/slider_images/6_mobile.jpg';
 
@@ -47,12 +45,7 @@
 			caption:
 				'Embracing the calm of a minimalist balcony setup. Green touches and soft lights for those serene evenings 💡🌿🛋️ #BalconyGoals #MinimalistLiving #UrbanOasis'
 		},
-		{
-			mobile_src: image_5_mobile,
-			desktop_src: image_5_desktop,
-			caption:
-				'Chasing sunsets with the best crew. #GoldenHourAdventures #FriendshipGoals #MountainVibes'
-		},
+
 		{
 			mobile_src: image_6_mobile,
 			desktop_src: image_6_desktop,
@@ -99,7 +92,7 @@
 						transition:fade={{ duration: 800 }}
 						on:mouseenter={() => toggleInterval(true)}
 						on:mouseleave={() => toggleInterval(false)}
-						class="absolute object-cover w-full h-full duration-300 border-4 rounded-md shadow-md hover:border-foreground"
+						class="absolute object-cover w-full h-full duration-300 rounded-md hover:scale-95"
 					/>
 				</picture>
 			{/each}
@@ -112,3 +105,12 @@
 		</figcaption>
 	</figure>
 {/if}
+
+<style>
+	img {
+		--mask: linear-gradient(#000 0 0) 50% / calc(100% - 55.5px) calc(100% - 55.5px) no-repeat,
+			radial-gradient(farthest-side, #000 98%, #0000) 0 0/60px 60px round;
+		-webkit-mask: var(--mask);
+		mask: var(--mask);
+	}
+</style>
