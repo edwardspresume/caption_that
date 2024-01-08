@@ -2,7 +2,7 @@
 	import type { HTMLTextareaAttributes } from 'svelte/elements';
 
 	import type { EnterKeyHintType } from '$lib/types';
-	import { cn } from '$lib/utils/shadCNUtils';
+	import { cn } from '$lib/utils/styleTransitionUtils';
 
 	import Label from '$components/ui/label/label.svelte';
 	import Textarea from '$components/ui/textarea/textarea.svelte';
@@ -23,7 +23,9 @@
 
 <Label class="grid gap-2">
 	<div>
-		<span>{label}</span>
+		<span>
+			<slot name="label" />
+		</span>
 
 		{#if maxlength}
 			<span class="text-xs text-muted-foreground">
