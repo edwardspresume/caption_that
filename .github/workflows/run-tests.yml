@@ -47,8 +47,8 @@ jobs:
       - name: 🏄 Copy test env vars
         if: matrix.test == 'e2e'
         run: cp .env.example .env
-        env:
-          SECRET_OPENAI_API_KEY: ${{ secrets.SECRET_OPENAI_API_KEY }}
 
       - name: Run ${{ matrix.test }} tests
         run: pnpm run test:${{ matrix.test }}
+        env:
+          SECRET_OPENAI_API_KEY: ${{ secrets.SECRET_OPENAI_API_KEY }}
