@@ -1,29 +1,33 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
+	import { navigating } from '$app/stores';
 	import StarredTitle from '$components/StarredTitle.svelte';
-	import CaptionCreationForm, { currentCaption } from '$components/appPage/form/CaptionCreationForm.svelte';
+	import CaptionCreationForm, {
+		currentCaption
+	} from '$components/appPage/form/CaptionCreationForm.svelte';
 	import Button from '$components/ui/button/button.svelte';
 
 	export let data: PageData;
 
-
 	let captionCopied = false;
-      let captionSectionRef: HTMLElement;
+	let captionSectionRef: HTMLElement;
 
-      $: if ($currentCaption && captionSectionRef) {
-            captionSectionRef.scrollIntoView();
-      }
+	$: if ($currentCaption && captionSectionRef) {
+		captionSectionRef.scrollIntoView();
+	}
 
-      function copyCaptionClipboard() {
-            navigator.clipboard.writeText($currentCaption);
+	function copyCaptionClipboard() {
+		navigator.clipboard.writeText($currentCaption);
 
-            captionCopied = true;
+		captionCopied = true;
 
-            setTimeout(() => {
-                  captionCopied = false;
-            }, 2000);
-      }
+		setTimeout(() => {
+			captionCopied = false;
+		}, 2000);
+	}
+
+	$: if (navigating) $currentCaption = '';
 </script>
 
 <main class="container flex-1 max-w-xl p-2 pb-10">
@@ -40,35 +44,23 @@
 	<CaptionCreationForm captionCreationForm={data.captionCreationForm} />
 
 	{#if $currentCaption}
-		  <section
-				class="p-4 mt-10 border rounded-md"
-				aria-live="polite"
-				bind:this={captionSectionRef}
-		  >
-				<div class="flex items-center justify-between mb-5">
-					  <h2 class="text-xl font-bold">Caption</h2>
+		<section class="p-4 mt-10 border rounded-md" aria-live="polite" bind:this={captionSectionRef}>
+			<div class="flex items-center justify-between mb-5">
+				<h2 class="text-xl font-bold">Caption</h2>
 
-					  <Button
-							class="flex items-center gap-1"
-							on:click={copyCaptionClipboard}
-					  >
-							{#if captionCopied}
-								  Copied 👍
-							{:else}
-								  <iconify-icon
-										icon="akar-icons:copy"
-										class="text-lg"
-								  ></iconify-icon>
-								  <span>Copy to Clipboard</span>
-							{/if}
-					  </Button>
-				</div>
+				<Button class="flex items-center gap-1" on:click={copyCaptionClipboard}>
+					{#if captionCopied}
+						Copied 👍
+					{:else}
+						<iconify-icon icon="akar-icons:copy" class="text-lg"></iconify-icon>
+						<span>Copy to Clipboard</span>
+					{/if}
+				</Button>
+			</div>
 
-				<p
-					  class="p-3 bg-accent rounded-md max-h-[400px] shadow-md overflow-hidden overflow-y-auto"
-				>
-					  {$currentCaption}
-				</p>
-		  </section>
+			<p class="max-h-[400px] overflow-hidden overflow-y-auto rounded-md bg-accent p-3 shadow-md">
+				{$currentCaption}
+			</p>
+		</section>
 	{/if}
 </main>
