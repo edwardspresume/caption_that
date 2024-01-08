@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Accordion as AccordionPrimitive } from "bits-ui";
-	import { cn } from "$lib/utils/shadCNUtils";
+	import { cn } from "$lib/utils/styleTransitionUtils";
 	import { slide } from "svelte/transition";
 
 	type $$Props = AccordionPrimitive.ContentProps;
@@ -19,7 +19,7 @@
 	{transitionConfig}
 	{...$$restProps}
 >
-	<div class="pt-0 pb-4">
+	<div class="pb-4 pt-0">
 		<slot />
 	</div>
 </AccordionPrimitive.Content>

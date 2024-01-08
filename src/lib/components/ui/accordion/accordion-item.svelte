@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Accordion as AccordionPrimitive } from "bits-ui";
-	import { cn } from "$lib/utils/shadCNUtils";
+	import { cn } from "$lib/utils/styleTransitionUtils";
 
 	type $$Props = AccordionPrimitive.ItemProps;
 

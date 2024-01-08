@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { cn } from '$lib/utils/shadCNUtils';
 	import { DropdownMenu as DropdownMenuPrimitive } from 'bits-ui';
+	import { cn } from '$lib/utils/styleTransitionUtils';
 	import { ChevronRight } from 'lucide-svelte';
 
 	type $$Props = DropdownMenuPrimitive.SubTriggerProps & {
@@ -15,7 +15,7 @@
 
 <DropdownMenuPrimitive.SubTrigger
 	class={cn(
-		'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[highlighted]:bg-accent data-[state=open]:bg-accent',
+		'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[highlighted]:bg-accent data-[state=open]:bg-accent data-[highlighted]:text-accent-foreground data-[state=open]:text-accent-foreground',
 		inset && 'pl-8',
 		className
 	)}

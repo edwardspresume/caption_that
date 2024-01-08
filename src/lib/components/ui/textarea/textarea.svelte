@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { cn } from '$lib/utils/shadCNUtils';
 	import type { HTMLTextareaAttributes } from 'svelte/elements';
+	import { cn } from '$lib/utils/styleTransitionUtils';
 
 	type $$Props = HTMLTextareaAttributes;
 

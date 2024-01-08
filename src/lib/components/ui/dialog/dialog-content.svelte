@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { cn, flyAndScale } from '$lib/utils/shadCNUtils';
 	import { Dialog as DialogPrimitive } from 'bits-ui';
-	import { X } from 'lucide-svelte';
 	import * as Dialog from '.';
+	import { cn, flyAndScale } from '$lib/utils/styleTransitionUtils';
+	import { X } from 'lucide-svelte';
 
 	type $$Props = DialogPrimitive.ContentProps;
 

@@ -1,11 +1,14 @@
 <script lang="ts">
-	import { cn } from '$lib/utils/shadCNUtils';
-	import { Select as SelectPrimitive } from 'bits-ui';
+	import { Select as SelectPrimitive } from "bits-ui";
+	import { cn } from "$lib/utils/styleTransitionUtils";
 
 	type $$Props = SelectPrimitive.SeparatorProps;
 
-	let className: $$Props['class'] = undefined;
+	let className: $$Props["class"] = undefined;
 	export { className as class };
 </script>
 
-<SelectPrimitive.Separator class={cn('-mx-1 my-1 h-px bg-muted', className)} {...$$restProps} />
+<SelectPrimitive.Separator
+	class={cn("-mx-1 my-1 h-px bg-muted", className)}
+	{...$$restProps}
+/>
