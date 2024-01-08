@@ -1,25 +1,24 @@
 import { SECRET_OPENAI_API_KEY } from '$env/static/private';
-import type { Actions, PageServerLoad } from './$types';
 
-import OpenAI from 'openai';
+import type { Actions, PageServerLoad } from './$types';
 
 import { message, superValidate } from 'sveltekit-superforms/server';
 
-import { Buffer } from 'buffer';
+import OpenAI from 'openai';
+
 import sharp from 'sharp';
 
-import { logError, sanitizeContent } from '$lib/utils';
-
 import type { AlertMessageType } from '$lib/types';
+import { createPageMetaTags } from '$lib/utils/metaTags';
 
+import { logError, sanitizeContent } from '$lib/utils';
 import {
 	CaptionLengthEnum,
+	CaptionToneEnum,
 	captionContextSchema,
-	type CaptionContextSchemaType,
-	type CaptionToneEnum
+	type CaptionContextSchemaType
 } from '$validations/captionContextSchema';
-
-import { imageValidationSchema, supportedImageTypes } from '$validations/imageValidationSchema';
+import { SUPPORTED_IMAGE_TYPES, imageValidationSchema } from '$validations/imageValidationSchema';
 
 type ImageCaptionRequest = {
 	imageBase64: string;
@@ -101,11 +100,18 @@ async function generateImageCaption({
 	return imageCaption;
 }
 
-export const load: PageServerLoad = async () => {
+export const load = (async () => {
+	const pageMetaTags = createPageMetaTags({
+		title: 'Image Caption Generator | CaptionThat',
+		description:
+			'CaptionThat is a web application that generates unique and descriptive captions for your images using OpenAI GPT-4 Vision'
+	});
+
 	return {
-		captionContextForm: await superValidate(captionContextSchema)
+		pageMetaTags: Object.freeze(pageMetaTags),
+		captionCreationForm: await superValidate(captionContextSchema)
 	};
-};
+}) satisfies PageServerLoad;
 
 export const actions: Actions = {
 	default: async ({ request }) => {
@@ -113,43 +119,46 @@ export const actions: Actions = {
 
 		const imageFile = formData.get('uploadedImage') as File | undefined;
 
-		const captionContextForm = await superValidate<CaptionContextSchemaType, AlertMessageType>(
+		const captionCreationForm = await superValidate<CaptionContextSchemaType, AlertMessageType>(
 			formData,
 			captionContextSchema
 		);
 
-		const imageValidationResult = imageValidationSchema.safeParse({ uploadedImage: imageFile });
+		const imageValidationResult = imageValidationSchema.safeParse({
+			uploadedImage: imageFile
+		});
 
 		if (!imageValidationResult.success) {
-			return message(captionContextForm, {
+			return message(captionCreationForm, {
 				alertType: 'error',
 				alertText: imageValidationResult.error.errors[0]?.message
 			});
 		}
 
-		if (!captionContextForm.valid) {
-			return message(captionContextForm, {
+		if (!captionCreationForm.valid) {
+			return message(captionCreationForm, {
 				alertType: 'error',
 				alertText: 'Invalid prompt'
 			});
 		}
 
 		try {
-			const imageType = supportedImageTypes[
+			const imageType = SUPPORTED_IMAGE_TYPES[
 				imageValidationResult.data.uploadedImage.type
 			] as keyof sharp.FormatEnum;
 
 			const imageBuffer = Buffer.from(await imageValidationResult.data.uploadedImage.arrayBuffer());
+
 			const base64Image = await compressImage(imageBuffer, imageType);
 
 			const generatedCaption = await generateImageCaption({
 				imageBase64: base64Image,
-				captionContext: sanitizeContent(captionContextForm.data.captionContext),
-				captionTone: captionContextForm.data.captionTone,
-				captionLength: captionContextForm.data.captionLength
+				captionContext: sanitizeContent(captionCreationForm.data.captionContext),
+				captionTone: captionCreationForm.data.captionTone,
+				captionLength: captionCreationForm.data.captionLength
 			});
 
-			return message(captionContextForm, {
+			return message(captionCreationForm, {
 				alertType: 'success',
 				alertText: generatedCaption
 			});
@@ -157,7 +166,7 @@ export const actions: Actions = {
 			logError(error, 'Error analyzing image');
 
 			return message(
-				captionContextForm,
+				captionCreationForm,
 				{
 					alertType: 'error',
 					alertText: 'Error analyzing image please try again'

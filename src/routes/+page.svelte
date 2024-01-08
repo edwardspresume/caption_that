@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { route } from '$lib/ROUTES';
 
-	import ImageCarousel from '$components/marketingPage/ImageCarousel.svelte';
+	import FaqSection from '$components/landingPage/FaqSection.svelte';
+	import H2 from '$components/landingPage/H2.svelte';
+	import ImageCarousel from '$components/landingPage/ImageCarousel.svelte';
 	import Button from '$components/ui/button/button.svelte';
 
-	import FaqSection from '$components/marketingPage/FaqSection.svelte';
-	import H2 from '$components/marketingPage/H2.svelte';
 	import demoVideo from '$lib/assets/demo_video.mp4';
 </script>
 
-<main class="container flex-1 p-2 pb-14 space-y-14 md:-mt-5">
+<main class="container flex-1 p-2 pb-10 space-y-14">
 	<header
-		class="space-y-6 md:grid md:grid-cols-[1fr,1.7fr] md:gap-8 md:justify-between md:items-center md:justify-items-end sm:h-[100dvh]"
+		class="space-y-6 sm:h-[85dvh] md:grid md:grid-cols-[1fr,1.7fr] md:items-center md:justify-between md:justify-items-end md:gap-8"
 	>
-		<section class="space-y-6 text-center md:text-left text-pretty">
+		<section class="space-y-6 text-center text-pretty md:text-left">
 			<h1 class="text-2xl font-bold">CaptionThat - Unleash Your Creativity</h1>
 
-			<h2 class="space-x-3 text-xl">
+			<h2 class="text-xl sm:space-x-3">
 				<span>📸 Snap It.</span>
 
 				<span>📝 Caption It.</span>
@@ -37,7 +37,7 @@
 	<section>
 		<H2>How it works</H2>
 
-		<div class="space-y-6 md:grid md:grid-cols-[2fr,1fr] md:gap-8 md:items-center">
+		<div class="space-y-6 md:grid md:grid-cols-[2fr,1fr] md:items-center md:gap-8">
 			<div class="order-2 space-y-3 md:text-xl">
 				<h3>
 					Step 1:
