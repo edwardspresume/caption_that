@@ -15,7 +15,10 @@
 </script>
 
 <fieldset class="grid w-full gap-2">
-	<Label for="toneSelector" class="text-xs sm:text-sm">Tone (optional)</Label>
+	<Label for="toneSelector" class="text-xs sm:text-sm">
+		Tone
+		<span class="text-muted-foreground">(optional)</span>
+	</Label>
 
 	<Select.Root
 		portal={null}
