@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
 
-	import { currentCaption } from '$lib/store';
+	import { currentCaption } from './CaptionCreationForm.svelte';
 
 	import { MAX_FILE_SIZE_MB, imageValidationSchema } from '$validations/imageValidationSchema';
 
@@ -41,14 +41,14 @@
 </script>
 
 <label
-	class="relative grid gap-2 p-4 text-sm text-center transition-colors duration-300 border-2 border-dashed rounded-md border-foreground/30 place-content-center justify-items-center hover:bg-accent/40"
+	class="relative grid gap-2 p-4 text-sm text-center transition-colors duration-300 border-2 border-dashed rounded-md place-content-center justify-items-center border-foreground/30 hover:bg-accent/40"
 >
 	<input
 		type="file"
 		accept="image/*"
 		name="uploadedImage"
-		class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-		data-testid="file-drop-zone-input"
+		class="absolute top-0 left-0 opacity-0 cursor-pointer size-full"
+		data-testId="file-drop-zone-input"
 		on:change={handleImageUpload}
 	/>
 
@@ -56,7 +56,7 @@
 		<img
 			src={uploadedImageUrl}
 			alt="Uploaded Preview"
-			class="object-contain border rounded-md border-foreground/10 max-h-28"
+			class="object-contain border rounded-md max-h-28 border-foreground/10"
 		/>
 	{:else}
 		<iconify-icon icon="flat-color-icons:add-image" class="text-5xl"></iconify-icon>
@@ -67,11 +67,6 @@
 			<span class="text-sm text-muted-foreground">
 				(Max file size: {MAX_FILE_SIZE_MB}MB)
 			</span>
-		</p>
-
-		<p class="text-muted-foreground">
-			<span class="font-semibold">Privacy Notice:</span> We respect your privacy. Images uploaded are
-			not saved on our servers and are only used for caption generation.
 		</p>
 	{/if}
 </label>
