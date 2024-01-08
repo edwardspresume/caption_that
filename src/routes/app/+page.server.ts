@@ -143,17 +143,22 @@ export const actions: Actions = {
 		}
 
 		try {
-			const imageType = SUPPORTED_IMAGE_TYPES[
-				imageValidationResult.data.uploadedImage.type
-			] as keyof sharp.FormatEnum;
+			const imageType = imageValidationResult.data.uploadedImage.type.split(
+				'/'
+			)[1] as keyof sharp.FormatEnum;
 
+			if (!SUPPORTED_IMAGE_TYPES.includes(imageType)) {
+				throw new Error('Unsupported image type');
+			}
 			const imageBuffer = Buffer.from(await imageValidationResult.data.uploadedImage.arrayBuffer());
 
 			const base64Image = await compressImage(imageBuffer, imageType);
 
+			const captionContext = captionCreationForm.data.captionContext;
+
 			const generatedCaption = await generateImageCaption({
 				imageBase64: base64Image,
-				captionContext: sanitizeContent(captionCreationForm.data.captionContext),
+				captionContext: captionContext ? sanitizeContent(captionContext) : undefined,
 				captionTone: captionCreationForm.data.captionTone,
 				captionLength: captionCreationForm.data.captionLength
 			});
