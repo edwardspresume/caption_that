@@ -1,39 +1,44 @@
 <script context="module" lang="ts">
+	import { writable } from 'svelte/store';
+
 	export const MAIN_NAV_ID: string = 'main_nav';
+
+	export const isSiteNavMenuOpen = writable(false);
 </script>
 
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
 
-	import { cn } from '$lib/utils/shadCNUtils';
+	import { mainNavLinks } from '$lib/navLinks';
+	import { cn } from '$lib/utils/styleTransitionUtils';
 
 	import Button from '$components/ui/button/button.svelte';
-	import { route } from '$lib/ROUTES';
-	import SiteMainNavMenuToggleBtn, { isSiteNavMenuOpen } from './SiteMainNavMenuToggleBtn.svelte';
 
 	let className: HTMLAttributes<HTMLElement>['class'] = undefined;
 	export { className as class };
-</script>
 
-<SiteMainNavMenuToggleBtn />
+	// computed property for dynamic classes
+	$: dynamicClasses = {
+		'-translate-x-full': !$isSiteNavMenuOpen
+	};
+
+	// static classes
+	const staticClasses =
+		'absolute left-0 z-50 w-full px-4 pt-10 transition-transform duration-300 top-full h-svh sm:h-full sm:relative sm:w-fit sm:-translate-x-0 sm:p-0 bg-secondary sm:bg-transparent';
+</script>
 
 <nav
 	id={MAIN_NAV_ID}
 	aria-label="Main Navigation"
-	class={cn(
-		`absolute z-50 top-full left-0 h-[100svh] w-full px-4 pt-10 transition-transform duration-300 sm:h-full sm:relative sm:w-fit sm:-translate-x-0 sm:px-0  sm:pt-0 bg-secondary sm:bg-transparent ${
-			!$isSiteNavMenuOpen ? '-translate-x-full' : ''
-		}`,
-		className
-	)}
+	class={cn(staticClasses, dynamicClasses, className)}
 >
-	<ul class="grid gap-2 sm:flex">
-		<li>
-			<Button variant="outline" class="w-full" href={route('/')}>Home</Button>
-		</li>
-
-		<li>
-			<Button variant="outline" class="w-full" href={route('/app')}>App</Button>
-		</li>
+	<ul class="grid gap-5 *:*:w-full sm:flex sm:gap-2">
+		{#each Object.values(mainNavLinks) as link}
+			<li>
+				<Button href={link.href} variant="outline" aria-label={link.ariaLabel}>
+					{link.title}
+				</Button>
+			</li>
+		{/each}
 	</ul>
 </nav>

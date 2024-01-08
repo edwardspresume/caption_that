@@ -1,14 +1,8 @@
-<script context="module">
-	import { writable } from 'svelte/store';
-
-	export const isSiteNavMenuOpen = writable(false);
-</script>
-
 <script>
 	import { navigating } from '$app/stores';
 	import { onMount } from 'svelte';
 
-	import { MAIN_NAV_ID } from './SiteMainNav.svelte';
+	import { MAIN_NAV_ID, isSiteNavMenuOpen } from './SiteMainNav.svelte';
 
 	// Close the site nav menu when navigating
 	$: if ($navigating) $isSiteNavMenuOpen = false;
@@ -31,7 +25,7 @@
 	aria-expanded={$isSiteNavMenuOpen}
 	aria-label="Toggle Main Navigation"
 	on:click={() => ($isSiteNavMenuOpen = !$isSiteNavMenuOpen)}
-	class="p-2 border rounded sm:hidden"
+	class="rounded border p-2 sm:hidden"
 >
 	<div />
 	<div />

@@ -1,23 +1,29 @@
 <script>
-	import { Routes } from '$lib/navLinks';
+	import { page } from '$app/stores';
 
-	import StarredTitle from '$components/appPage/StarredTitle.svelte';
+	import { route } from '$lib/ROUTES';
+
+	import StarredTitle from '$components/StarredTitle.svelte';
 	import FeedbackForm from '$components/appPage/form/FeedbackForm.svelte';
 	import Button from '$components/ui/button/button.svelte';
 	import SiteMainNav from './SiteMainNav.svelte';
+	import SiteMainNavMenuToggleBtn from './SiteMainNavMenuToggleBtn.svelte';
 	import ThemeToggler from './ThemeToggler.svelte';
 </script>
 
-<header class="relative mb-5 border-b">
+<header class="relative mb-10 border-b">
 	<div class="container flex items-center justify-between p-2">
-		<Button href={Routes.HOMEPAGE} variant="ghost" class="gap-1 p-0 text-base font-bold sm:text-xl">
+		<Button href={route('/')} variant="link" class="p-0 text-base font-bold sm:text-2xl">
 			<StarredTitle>CaptionThat</StarredTitle>
 		</Button>
 
 		<div class="flex gap-2">
-			<FeedbackForm />
+			<SiteMainNav />
+			{#if $page.url.pathname === route('/app')}
+				<FeedbackForm />
+			{/if}
 			<ThemeToggler />
-			<SiteMainNav class="order-first" />
+			<SiteMainNavMenuToggleBtn />
 		</div>
 	</div>
 </header>
