@@ -8,6 +8,6 @@
 	},
 	"aliases": {
 		"components": "$components",
-		"utils": "$lib/utils/shadCNUtils.ts"
+		"utils": "$lib/utils/styleTransitionUtils"
 	}
 }
