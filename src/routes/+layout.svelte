@@ -1,26 +1,34 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
+	import { page } from '$app/stores';
+
 	import { inject } from '@vercel/analytics';
+
+	import { Toaster } from '$components/ui/sonner';
+	import { Bar } from '@bobbymannino/svelte-progress';
+	import { ModeWatcher } from 'mode-watcher';
+
+	import extend from 'just-extend';
+	import { MetaTags } from 'svelte-meta-tags';
 
 	import '../app.pcss';
 
-	import { Bar } from '@bobbymannino/svelte-progress';
-	import { Toaster } from 'svelte-sonner';
-
-	import { ModeWatcher } from 'mode-watcher';
-
 	import SiteMainHeader from '$components/siteMainHeader/SiteMainHeader.svelte';
 
+	export let data;
+
 	inject({ mode: dev ? 'development' : 'production' });
+
+	$: metaTags = extend(true, {}, data.baseMetaTags, $page.data.pageMetaTags);
 </script>
 
+<MetaTags {...metaTags} />
+
 <Bar color="#6D28D9" size="big" speed="fast" />
-
-<Toaster richColors closeButton position="top-right" />
-
+<Toaster richColors closeButton position={'top-center'} />
 <ModeWatcher />
 
-<div class="flex flex-col h-[100vh]">
+<div class="flex flex-col h-svh">
 	<SiteMainHeader />
 
 	<slot />
@@ -31,7 +39,7 @@
 				Created by <a
 					href="https://twitter.com/edwardspresume"
 					target="_blank"
-					class="italic text-blue-400 hover:underline hover:text-blue-500">Edwards Presume</a
+					class="italic text-blue-400 hover:text-blue-500 hover:underline">Edwards Presume</a
 				>
 			</p>
 		</div>
