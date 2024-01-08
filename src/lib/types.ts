@@ -6,7 +6,7 @@ export enum AlertType {
 }
 
 export type AlertMessageType = {
-	alertType: 'success' | 'error' | 'warning' | 'info';
+	alertType: AlertType;
 	alertText: string;
 };
 
