@@ -1,10 +1,13 @@
+<script context="module">
+	import { writable } from 'svelte/store';
+
+	export const currentCaption = writable('');
+</script>
+
 <script lang="ts">
+	import { toast } from 'svelte-sonner';
 	import type { SuperValidated } from 'sveltekit-superforms';
 	import { superForm } from 'sveltekit-superforms/client';
-
-	import { toast } from 'svelte-sonner';
-
-	import { currentCaption } from '$lib/store';
 
 	import {
 		MAX_CAPTION_PROMPT_LENGTH,
@@ -12,15 +15,15 @@
 		type CaptionContextSchemaType
 	} from '$validations/captionContextSchema';
 
-	import CaptionLengthSelector from '$components/appPage/form/CaptionLengthSelector.svelte';
-	import SubmitButton from '$components/appPage/form/SubmitButton.svelte';
-	import TextArea from '$components/appPage/form/TextArea.svelte';
+	import CaptionLengthSelector from './CaptionLengthSelector.svelte';
 	import CaptionToneSelector from './CaptionToneSelector.svelte';
 	import FileDropZone from './FileDropZone.svelte';
+	import SubmitButton from './SubmitButton.svelte';
+	import TextArea from './TextArea.svelte';
 
-	export let captionContextForm: SuperValidated<CaptionContextSchemaType>;
+	export let captionCreationForm: SuperValidated<CaptionContextSchemaType>;
 
-	const { enhance, form, delayed, message, errors } = superForm(captionContextForm, {
+	const { enhance, form, delayed, message, errors } = superForm(captionCreationForm, {
 		resetForm: false,
 		validators: captionContextSchema,
 		taintedMessage: null,
@@ -54,12 +57,16 @@
 
 	<TextArea
 		name="captionContext"
-		label="Context (optional)"
+		label="Context"
 		bind:value={$form.captionContext}
 		errorMessage={$errors.captionContext}
 		placeholder={`Provide context or themes to help guide the generation of your caption. \n\nExample: Emphasis on fashion and aesthetics, or no hashtags`}
 		maxlength={MAX_CAPTION_PROMPT_LENGTH}
-	/>
+	>
+		<svelte:fragment slot="label">
+			Context <span class="text-muted-foreground">(optional)</span>
+		</svelte:fragment>
+	</TextArea>
 
 	<SubmitButton disabled={$delayed}>
 		{#if $delayed}
