@@ -6,11 +6,11 @@ import { fireEvent, render, waitFor } from '@testing-library/svelte';
 import { toast } from 'svelte-sonner';
 
 import FileDropZone from '$components/appPage/form/FileDropZone.svelte';
-import { currentCaption } from '$lib/store';
 import {
 	IMAGE_VALIDATION_ERROR_MESSAGES,
 	imageValidationSchema
 } from '$validations/imageValidationSchema';
+import { currentCaption } from '$components/appPage/form/CaptionCreationForm.svelte';
 
 describe('FileDropZone', () => {
 	let getByTestId: (id: string) => HTMLElement;
