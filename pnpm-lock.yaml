@@ -151,6 +151,9 @@ devDependencies:
   sveltekit-superforms:
     specifier: ^1.13.2
     version: 1.13.2(@sveltejs/kit@2.1.0)(svelte@4.2.8)(zod@3.22.4)
+  sveltekit-view-transition:
+    specifier: ^0.5.3
+    version: 0.5.3(@sveltejs/kit@2.1.0)(svelte@4.2.8)
   tailwindcss:
     specifier: ^3.4.1
     version: 3.4.1
@@ -5783,6 +5786,16 @@ packages:
       '@sveltejs/kit': 2.1.0(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.11)
       svelte: 4.2.8
       zod: 3.22.4
+    dev: true
+
+  /sveltekit-view-transition@0.5.3(@sveltejs/kit@2.1.0)(svelte@4.2.8):
+    resolution: {integrity: sha512-qm8NDhpgIyiM3TJfO26iMGZWcWW3/GqsX9KctNWJaZ5ySdnkzZ4p74fkYWelaM2LLEpLDJqzouQLyrgnbszfVA==}
+    peerDependencies:
+      '@sveltejs/kit': ^1.20.4 || ^2.0.0
+      svelte: ^4.0.0 || ^5.0.0
+    dependencies:
+      '@sveltejs/kit': 2.1.0(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.11)
+      svelte: 4.2.8
     dev: true
 
   /symbol-tree@3.2.4:

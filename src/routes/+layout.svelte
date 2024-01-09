@@ -7,6 +7,7 @@
 	import { Toaster } from '$components/ui/sonner';
 	import { Bar } from '@bobbymannino/svelte-progress';
 	import { ModeWatcher } from 'mode-watcher';
+	import { setupViewTransition } from 'sveltekit-view-transition';
 
 	import extend from 'just-extend';
 	import { MetaTags } from 'svelte-meta-tags';
@@ -18,6 +19,8 @@
 	export let data;
 
 	inject({ mode: dev ? 'development' : 'production' });
+
+	setupViewTransition();
 
 	$: metaTags = extend(true, {}, data.baseMetaTags, $page.data.pageMetaTags);
 </script>
