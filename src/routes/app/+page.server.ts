@@ -18,7 +18,7 @@ import {
 	captionContextSchema,
 	type CaptionContextSchemaType
 } from '$validations/captionContextSchema';
-import { SUPPORTED_IMAGE_TYPES, imageValidationSchema } from '$validations/imageValidationSchema';
+import { imageValidationSchema } from '$validations/imageValidationSchema';
 
 type ImageCaptionRequest = {
 	imageBase64: string;
@@ -143,13 +143,8 @@ export const actions: Actions = {
 		}
 
 		try {
-			const imageType = imageValidationResult.data.uploadedImage.type.split(
-				'/'
-			)[1] as keyof sharp.FormatEnum;
+			const imageType = imageFile?.type.split('/')[1] as keyof sharp.FormatEnum;
 
-			if (!SUPPORTED_IMAGE_TYPES.includes(imageType)) {
-				throw new Error('Unsupported image type');
-			}
 			const imageBuffer = Buffer.from(await imageValidationResult.data.uploadedImage.arrayBuffer());
 
 			const base64Image = await compressImage(imageBuffer, imageType);
