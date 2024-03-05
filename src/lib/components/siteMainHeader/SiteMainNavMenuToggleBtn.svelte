@@ -25,7 +25,7 @@
 	aria-expanded={$isSiteNavMenuOpen}
 	aria-label="Toggle Main Navigation"
 	on:click={() => ($isSiteNavMenuOpen = !$isSiteNavMenuOpen)}
-	class="rounded border p-2 sm:hidden"
+	class="p-2 border rounded sm:hidden"
 >
 	<div />
 	<div />
