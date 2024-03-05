@@ -3,12 +3,6 @@
 	import { writable } from 'svelte/store';
 	import { fade } from 'svelte/transition';
 
-	type Image = {
-		mobile_src: string;
-		desktop_src: string;
-		caption: string;
-	};
-
 	import image_1_desktop from '$lib/assets/slider_images/1_desktop.jpg';
 	import image_1_mobile from '$lib/assets/slider_images/1_mobile.jpg';
 	import image_2_desktop from '$lib/assets/slider_images/2_desktop.jpg';
@@ -19,6 +13,12 @@
 	import image_4_mobile from '$lib/assets/slider_images/4_mobile.jpg';
 	import image_6_desktop from '$lib/assets/slider_images/6_desktop.jpg';
 	import image_6_mobile from '$lib/assets/slider_images/6_mobile.jpg';
+
+	type Image = {
+		mobile_src: string;
+		desktop_src: string;
+		caption: string;
+	};
 
 	const carouselImages: Image[] = [
 		{
@@ -78,16 +78,16 @@
 		if (imageChangeIntervalId) clearInterval(imageChangeIntervalId);
 	};
 
+	// Function to start or stop automatically advancing to the next image
+	const toggleImageChangeInterval = (shouldPause: boolean) => {
+		shouldPause ? stopImageChangeInterval() : startImageChangeInterval();
+	};
+
 	// Start automatically advancing to the next image when the component is mounted
 	onMount(startImageChangeInterval);
 
 	// Stop automatically advancing to the next image when the component is destroyed
 	onDestroy(stopImageChangeInterval);
-
-	// Function to start or stop automatically advancing to the next image
-	const toggleImageChangeInterval = (shouldPause: boolean) => {
-		shouldPause ? stopImageChangeInterval() : startImageChangeInterval();
-	};
 </script>
 
 {#if carouselImages.length > 0}
