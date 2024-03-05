@@ -7,7 +7,7 @@
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
 	import type { SuperValidated } from 'sveltekit-superforms';
-	import { superForm } from 'sveltekit-superforms/client';
+	import { superForm } from 'sveltekit-superforms';
 
 	import {
 		MAX_CAPTION_PROMPT_LENGTH,

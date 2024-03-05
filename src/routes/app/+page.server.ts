@@ -2,7 +2,7 @@ import { SECRET_OPENAI_API_KEY } from '$env/static/private';
 
 import type { Actions, PageServerLoad } from './$types';
 
-import { message, superValidate } from 'sveltekit-superforms/server';
+import { message, superValidate } from 'sveltekit-superforms';
 
 import OpenAI from 'openai';
 
