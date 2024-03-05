@@ -7,6 +7,7 @@
 </script>
 
 <script lang="ts">
+	import { page } from '$app/stores';
 	import type { HTMLAttributes } from 'svelte/elements';
 
 	import { mainNavLinks } from '$lib/navLinks';
@@ -34,8 +35,16 @@
 >
 	<ul class="grid gap-5 *:*:w-full sm:flex sm:gap-2">
 		{#each Object.values(mainNavLinks) as link}
+			{@const isCurrentPage = $page.url.pathname === link.href ? 'page' : undefined}
+
 			<li>
-				<Button href={link.href} variant="outline" aria-label={link.ariaLabel}>
+				<Button
+					href={link.href}
+					variant="outline"
+					aria-label={link.ariaLabel}
+					aria-current={isCurrentPage}
+					class={isCurrentPage ? '' : 'text-muted-foreground'}
+				>
 					{link.title}
 				</Button>
 			</li>
