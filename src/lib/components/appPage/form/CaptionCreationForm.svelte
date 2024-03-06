@@ -6,8 +6,9 @@
 
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
-	import type { SuperValidated } from 'sveltekit-superforms';
+	import type { Infer, SuperValidated } from 'sveltekit-superforms';
 	import { superForm } from 'sveltekit-superforms';
+	import { zodClient } from 'sveltekit-superforms/adapters';
 
 	import {
 		MAX_CAPTION_PROMPT_LENGTH,
@@ -21,12 +22,11 @@
 	import SubmitButton from './SubmitButton.svelte';
 	import TextArea from './TextArea.svelte';
 
-	export let captionCreationForm: SuperValidated<CaptionContextSchemaType>;
+	export let captionCreationForm: SuperValidated<Infer<CaptionContextSchemaType>>;
 
 	const { enhance, form, delayed, message, errors } = superForm(captionCreationForm, {
 		resetForm: false,
-		validators: captionContextSchema,
-		taintedMessage: null,
+		validators: zodClient(captionContextSchema),
 
 		onUpdated: () => {
 			if (!$message) return;
