@@ -2,7 +2,8 @@ import { SECRET_OPENAI_API_KEY } from '$env/static/private';
 
 import type { Actions, PageServerLoad } from './$types';
 
-import { message, superValidate } from 'sveltekit-superforms';
+import { message, superValidate, type Infer, type SuperValidated } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 
 import OpenAI from 'openai';
 
@@ -109,9 +110,11 @@ export const load = (async () => {
 
 	return {
 		pageMetaTags: Object.freeze(pageMetaTags),
-		captionCreationForm: await superValidate(captionContextSchema)
+		captionCreationForm: await superValidate(zod(captionContextSchema))
 	};
 }) satisfies PageServerLoad;
+
+type CaptionFormValidateType = SuperValidated<Infer<CaptionContextSchemaType>, AlertMessageType>;
 
 export const actions: Actions = {
 	default: async ({ request }) => {
@@ -119,9 +122,9 @@ export const actions: Actions = {
 
 		const imageFile = formData.get('uploadedImage') as File | undefined;
 
-		const captionCreationForm = await superValidate<CaptionContextSchemaType, AlertMessageType>(
+		const captionCreationForm: CaptionFormValidateType = await superValidate(
 			formData,
-			captionContextSchema
+			zod(captionContextSchema)
 		);
 
 		const imageValidationResult = imageValidationSchema.safeParse({
