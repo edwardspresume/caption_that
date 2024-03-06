@@ -12,9 +12,9 @@
 
 	import {
 		MAX_CAPTION_PROMPT_LENGTH,
-		captionContextSchema,
-		type CaptionContextSchemaType
-	} from '$validations/captionContextSchema';
+		captionFormZodSchema,
+		type CaptionFormZodSchemaType
+	} from '$validations/captionFormZodSchema';
 
 	import CaptionLengthSelector from './CaptionLengthSelector.svelte';
 	import CaptionToneSelector from './CaptionToneSelector.svelte';
@@ -22,11 +22,10 @@
 	import SubmitButton from './SubmitButton.svelte';
 	import TextArea from './TextArea.svelte';
 
-	export let captionCreationForm: SuperValidated<Infer<CaptionContextSchemaType>>;
+	export let captionCreationForm: SuperValidated<Infer<CaptionFormZodSchemaType>>;
 
 	const { enhance, form, delayed, message, errors } = superForm(captionCreationForm, {
-		resetForm: false,
-		validators: zodClient(captionContextSchema),
+		validators: zodClient(captionFormZodSchema),
 
 		onUpdated: () => {
 			if (!$message) return;
@@ -47,7 +46,7 @@
 </script>
 
 <form method="post" use:enhance enctype="multipart/form-data" class="grid gap-8">
-	<FileDropZone />
+	<FileDropZone bind:chosenImageFile={$form.image} errorMessage={$errors.image} />
 
 	<div class="flex flex-col gap-8 sm:flex-row">
 		<CaptionToneSelector bind:value={$form.captionTone} errorMessage={$errors.captionTone} />
@@ -58,8 +57,8 @@
 	<TextArea
 		name="captionContext"
 		label="Context"
-		bind:value={$form.captionContext}
-		errorMessage={$errors.captionContext}
+		bind:value={$form.captionPrompt}
+		errorMessage={$errors.captionPrompt}
 		placeholder={`Provide context or themes to help guide the generation of your caption. \n\nExample: Emphasis on fashion and aesthetics, or no hashtags`}
 		maxlength={MAX_CAPTION_PROMPT_LENGTH}
 	>
