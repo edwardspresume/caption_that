@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
 
-	import { CaptionLengthEnum } from '$validations/captionContextSchema';
+	import { CaptionLengthEnum } from '$validations/captionFormZodSchema';
 
 	import Label from '$components/ui/label/label.svelte';
 	import * as Select from '$components/ui/select';
