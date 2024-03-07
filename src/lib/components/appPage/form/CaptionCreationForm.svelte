@@ -25,6 +25,7 @@
 	export let captionCreationForm: SuperValidated<Infer<CaptionFormZodSchemaType>>;
 
 	const { enhance, form, delayed, message, errors } = superForm(captionCreationForm, {
+		resetForm: false,
 		validators: zodClient(captionFormZodSchema),
 
 		onUpdated: () => {
