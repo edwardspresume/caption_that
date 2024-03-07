@@ -73,8 +73,8 @@
 		placeholder={`Provide context or themes to help guide the generation of your caption. \n\nExample: Emphasis on fashion and aesthetics, or no hashtags`}
 		maxlength={MAX_CAPTION_PROMPT_LENGTH}
 	>
-		<svelte:fragment slot="label">
-			Context <span class="text-muted-foreground">(optional)</span>
+		<svelte:fragment slot="subtext">
+			<span class="text-muted-foreground">(optional)</span>
 		</svelte:fragment>
 	</TextArea>
 

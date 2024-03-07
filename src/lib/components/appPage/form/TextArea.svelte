@@ -24,7 +24,7 @@
 <Label class="grid gap-2">
 	<div>
 		<span>{label}</span>
-		<slot name="label" />
+		<slot name="subtext" />
 
 		{#if maxlength}
 			<span class="text-xs text-muted-foreground">
