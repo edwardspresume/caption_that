@@ -15,9 +15,7 @@
 	function handleImageUpload(event: Event) {
 		const input = event.currentTarget as HTMLInputElement | null;
 
-		if (!input) return;
-
-		chosenImageFile = input.files?.item(0) as File;
+		chosenImageFile = input?.files?.item(0) as File;
 
 		// Revoke the old URL if it exists
 		if (uploadedImageUrl) {
