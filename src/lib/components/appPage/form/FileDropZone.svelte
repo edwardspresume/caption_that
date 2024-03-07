@@ -31,7 +31,7 @@
 
 <fieldset class="space-y-2">
 	<label
-		class="relative grid gap-2 p-4 text-sm text-center transition-colors duration-300 border-2 border-dashed rounded-md place-content-center justify-items-center border-foreground/30 hover:bg-accent/40"
+		class="relative grid aspect-[2/1] place-content-center justify-items-center gap-2 rounded-md border-2 border-dashed border-foreground/30 p-4 text-center text-sm transition-colors duration-300 hover:bg-accent/40"
 	>
 		<input
 			type="file"
@@ -47,7 +47,7 @@
 			<img
 				src={uploadedImageUrl}
 				alt="Uploaded Preview"
-				class="object-contain border rounded-md max-h-28 border-foreground/10"
+				class="absolute top-0 left-0 object-contain border rounded-md size-full border-foreground/10"
 			/>
 		{:else}
 			<iconify-icon icon="flat-color-icons:add-image" class="text-5xl"></iconify-icon>
