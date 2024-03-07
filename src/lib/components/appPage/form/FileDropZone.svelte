@@ -29,7 +29,7 @@
 	}
 </script>
 
-<div class="space-y-2">
+<fieldset class="space-y-2">
 	<label
 		class="relative grid gap-2 p-4 text-sm text-center transition-colors duration-300 border-2 border-dashed rounded-md place-content-center justify-items-center border-foreground/30 hover:bg-accent/40"
 	>
@@ -65,4 +65,4 @@
 	{#if errorMessage}
 		<p class="text-red-500">{errorMessage}</p>
 	{/if}
-</div>
+</fieldset>
