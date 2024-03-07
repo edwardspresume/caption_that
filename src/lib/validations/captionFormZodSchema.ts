@@ -56,8 +56,8 @@ export const captionFormZodSchema = z.object({
 			message: IMAGE_VALIDATION_ERROR_MESSAGES.fileTooLarge
 		}),
 
-	captionTone: z.nativeEnum(CaptionToneEnum).optional(),
-	captionLength: z.nativeEnum(CaptionLengthEnum).optional(),
+	captionTone: z.nativeEnum(CaptionToneEnum).default(CaptionToneEnum.Funny),
+	captionLength: z.nativeEnum(CaptionLengthEnum).default(CaptionLengthEnum.Medium),
 
 	captionPrompt: z
 		.string()
