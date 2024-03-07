@@ -13,10 +13,11 @@ export const SUPPORTED_IMAGE_TYPES: Array<keyof sharp.FormatEnum> = [
 
 export const IMAGE_VALIDATION_ERROR_MESSAGES = {
 	noFileUploaded: 'Please upload a file.',
+	fileEmpty: 'The file you uploaded is empty.',
+	fileTooLarge: `The file size must be less than ${MAX_FILE_SIZE_MB} MB.`,
 	unsupportedImageType: `The image type you uploaded is not supported. Please upload an image of one of the following types: ${SUPPORTED_IMAGE_TYPES.join(
 		', '
-	)}.`,
-	fileTooLarge: `The file size must be less than ${MAX_FILE_SIZE_MB} MB.`
+	)}.`
 };
 
 export enum CaptionToneEnum {
@@ -42,7 +43,10 @@ export const MAX_CAPTION_PROMPT_LENGTH = 300;
 export const captionFormZodSchema = z.object({
 	image: z
 		.instanceof(File, { message: IMAGE_VALIDATION_ERROR_MESSAGES.noFileUploaded })
-		.refine((file) => file.size > 0, IMAGE_VALIDATION_ERROR_MESSAGES.noFileUploaded)
+		.refine((file) => file.size > 0, IMAGE_VALIDATION_ERROR_MESSAGES.fileEmpty)
+		.refine((file) => file.size <= MAX_FILE_SIZE_MB * 1024 * 1024, {
+			message: IMAGE_VALIDATION_ERROR_MESSAGES.fileTooLarge
+		})
 		.refine(
 			(file) => {
 				const imageType = file.type.split('/')[1];
@@ -51,10 +55,7 @@ export const captionFormZodSchema = z.object({
 			{
 				message: IMAGE_VALIDATION_ERROR_MESSAGES.unsupportedImageType
 			}
-		)
-		.refine((file) => file.size <= MAX_FILE_SIZE_MB * 1024 * 1024, {
-			message: IMAGE_VALIDATION_ERROR_MESSAGES.fileTooLarge
-		}),
+		),
 
 	captionTone: z.nativeEnum(CaptionToneEnum),
 	captionLength: z.nativeEnum(CaptionLengthEnum),
