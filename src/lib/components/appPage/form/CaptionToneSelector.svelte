@@ -6,10 +6,15 @@
 	import Label from '$components/ui/label/label.svelte';
 	import * as Select from '$components/ui/select';
 
-	export let value: string | undefined;
+	export let value: string;
 	export let errorMessage: string[] | undefined;
 
 	const captionToneOptions = Object.values(CaptionToneEnum);
+
+	$: selectedTone = {
+		value: value,
+		label: value
+	};
 
 	$: if (errorMessage) toast.error(errorMessage.join(' '));
 </script>
@@ -22,8 +27,10 @@
 
 	<Select.Root
 		portal={null}
-		onSelectedChange={(selected) =>
-			(value = typeof selected?.value === 'string' ? selected.value : undefined)}
+		selected={selectedTone}
+		onSelectedChange={(selected) => {
+			selected && (value = selected.value);
+		}}
 	>
 		<Select.Trigger class="w-full" id="toneSelector">
 			<Select.Value placeholder="Select caption tone" />
@@ -32,7 +39,7 @@
 			<Select.Group>
 				{#each captionToneOptions as toneOption}
 					<Select.Item value={toneOption}>
-						{toneOption.charAt(0).toUpperCase() + toneOption.slice(1)}
+						{toneOption}
 					</Select.Item>
 				{/each}
 			</Select.Group>
