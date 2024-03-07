@@ -37,9 +37,9 @@
 		},
 
 		onUpdated: () => {
-			if (previousImage && !$form.image) $form.image = previousImage;
-
 			if (!$message) return;
+
+			if (previousImage && !$form.image) $form.image = previousImage;
 
 			const { alertType, alertText } = $message;
 
