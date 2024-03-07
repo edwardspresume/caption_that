@@ -1,15 +1,3 @@
-export enum AlertType {
-	SUCCESS = 'success',
-	ERROR = 'error',
-	WARNING = 'warning',
-	INFO = 'info'
-}
-
-export type AlertMessageType = {
-	alertType: AlertType;
-	alertText: string;
-};
-
 export type EnterKeyHintType =
 	| 'search'
 	| 'enter'

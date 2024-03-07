@@ -2,22 +2,20 @@ import { SECRET_OPENAI_API_KEY } from '$env/static/private';
 
 import type { Actions, PageServerLoad } from './$types';
 
-import { message, superValidate, type Infer, type SuperValidated } from 'sveltekit-superforms';
+import { message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
 import OpenAI from 'openai';
 
 import sharp from 'sharp';
 
-import type { AlertMessageType } from '$lib/types';
 import { createPageMetaTags } from '$lib/utils/metaTags';
 
 import { logError, sanitizeContent } from '$lib/utils';
 import {
 	CaptionLengthEnum,
 	CaptionToneEnum,
-	captionFormZodSchema,
-	type CaptionFormZodSchemaType
+	captionFormZodSchema
 } from '$validations/captionFormZodSchema';
 
 type ImageCaptionRequest = {
@@ -113,14 +111,9 @@ export const load = (async () => {
 	};
 }) satisfies PageServerLoad;
 
-type CaptionFormValidateType = SuperValidated<Infer<CaptionFormZodSchemaType>, AlertMessageType>;
-
 export const actions: Actions = {
 	default: async ({ request }) => {
-		const captionCreationForm: CaptionFormValidateType = await superValidate(
-			request,
-			zod(captionFormZodSchema)
-		);
+		const captionCreationForm = await superValidate(request, zod(captionFormZodSchema));
 
 		if (!captionCreationForm.valid) {
 			return message(captionCreationForm, {
