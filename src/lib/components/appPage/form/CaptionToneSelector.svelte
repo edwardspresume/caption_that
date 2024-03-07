@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { toast } from 'svelte-sonner';
-
 	import { CaptionToneEnum } from '$validations/captionFormZodSchema';
 
 	import Label from '$components/ui/label/label.svelte';
@@ -15,8 +13,6 @@
 		value: value,
 		label: value
 	};
-
-	$: if (errorMessage) toast.error(errorMessage.join(' '));
 </script>
 
 <fieldset class="grid w-full gap-2">
@@ -43,4 +39,8 @@
 		</Select.Content>
 		<Select.Input name="captionTone" />
 	</Select.Root>
+
+	{#if errorMessage}
+		<p class="text-red-500">{errorMessage}</p>
+	{/if}
 </fieldset>
