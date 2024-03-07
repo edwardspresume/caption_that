@@ -20,21 +20,21 @@ export const IMAGE_VALIDATION_ERROR_MESSAGES = {
 };
 
 export enum CaptionToneEnum {
-	Funny = 'funny',
-	Witty = 'witty',
-	Serious = 'serious',
-	Casual = 'casual',
-	Formal = 'formal',
-	Inspirational = 'inspirational',
-	Enthusiastic = 'enthusiastic',
-	Informative = 'informative'
+	Funny = 'Funny',
+	Witty = 'Witty',
+	Serious = 'Serious',
+	Casual = 'Casual',
+	Formal = 'Formal',
+	Inspirational = 'Inspirational',
+	Enthusiastic = 'Enthusiastic',
+	Informative = 'Informative'
 }
 
 export enum CaptionLengthEnum {
-	Short = 'short',
-	Medium = 'medium',
-	Long = 'long',
-	VeryLong = 'very-long'
+	Short = 'Short',
+	Medium = 'Medium',
+	Long = 'Long',
+	VeryLong = 'Very long'
 }
 
 export const MAX_CAPTION_PROMPT_LENGTH = 300;
@@ -56,8 +56,8 @@ export const captionFormZodSchema = z.object({
 			message: IMAGE_VALIDATION_ERROR_MESSAGES.fileTooLarge
 		}),
 
-	captionTone: z.nativeEnum(CaptionToneEnum).default(CaptionToneEnum.Funny),
-	captionLength: z.nativeEnum(CaptionLengthEnum).default(CaptionLengthEnum.Medium),
+	captionTone: z.nativeEnum(CaptionToneEnum),
+	captionLength: z.nativeEnum(CaptionLengthEnum),
 
 	captionPrompt: z
 		.string()
