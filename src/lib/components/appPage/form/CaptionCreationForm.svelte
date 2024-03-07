@@ -66,7 +66,7 @@
 	</div>
 
 	<TextArea
-		name="captionContext"
+		name="captionPrompt"
 		label="Context"
 		bind:value={$form.captionPrompt}
 		errorMessage={$errors.captionPrompt}
