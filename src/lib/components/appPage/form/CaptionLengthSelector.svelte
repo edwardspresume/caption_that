@@ -6,10 +6,15 @@
 	import Label from '$components/ui/label/label.svelte';
 	import * as Select from '$components/ui/select';
 
-	export let value: string | undefined;
+	export let value: string;
 	export let errorMessage: string[] | undefined;
 
 	const captionLengthOptions = Object.values(CaptionLengthEnum);
+
+	$: selectedLength = {
+		value: value,
+		label: value
+	};
 
 	$: if (errorMessage) toast.error(errorMessage.join(' '));
 </script>
@@ -22,8 +27,10 @@
 
 	<Select.Root
 		portal={null}
-		onSelectedChange={(selected) =>
-			(value = typeof selected?.value === 'string' ? selected.value : undefined)}
+		selected={selectedLength}
+		onSelectedChange={(selected) => {
+			selected && (value = selected.value);
+		}}
 	>
 		<Select.Trigger class="w-full" id="lengthSelector">
 			<Select.Value placeholder="Select caption length" />
@@ -32,7 +39,7 @@
 			<Select.Group>
 				{#each captionLengthOptions as lengthOption}
 					<Select.Item value={lengthOption}>
-						{lengthOption.charAt(0).toUpperCase() + lengthOption.slice(1).replace('-', ' ')}
+						{lengthOption}
 					</Select.Item>
 				{/each}
 			</Select.Group>
