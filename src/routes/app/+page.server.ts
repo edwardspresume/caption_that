@@ -16,10 +16,9 @@ import { logError, sanitizeContent } from '$lib/utils';
 import {
 	CaptionLengthEnum,
 	CaptionToneEnum,
-	captionContextSchema,
-	type CaptionContextSchemaType
-} from '$validations/captionContextSchema';
-import { imageValidationSchema } from '$validations/imageValidationSchema';
+	captionFormZodSchema,
+	type CaptionFormZodSchemaType
+} from '$validations/captionFormZodSchema';
 
 type ImageCaptionRequest = {
 	imageBase64: string;
@@ -110,33 +109,18 @@ export const load = (async () => {
 
 	return {
 		pageMetaTags: Object.freeze(pageMetaTags),
-		captionCreationForm: await superValidate(zod(captionContextSchema))
+		captionCreationForm: await superValidate(zod(captionFormZodSchema))
 	};
 }) satisfies PageServerLoad;
 
-type CaptionFormValidateType = SuperValidated<Infer<CaptionContextSchemaType>, AlertMessageType>;
+type CaptionFormValidateType = SuperValidated<Infer<CaptionFormZodSchemaType>, AlertMessageType>;
 
 export const actions: Actions = {
 	default: async ({ request }) => {
-		const formData = await request.formData();
-
-		const imageFile = formData.get('uploadedImage') as File | undefined;
-
 		const captionCreationForm: CaptionFormValidateType = await superValidate(
-			formData,
-			zod(captionContextSchema)
+			request,
+			zod(captionFormZodSchema)
 		);
-
-		const imageValidationResult = imageValidationSchema.safeParse({
-			uploadedImage: imageFile
-		});
-
-		if (!imageValidationResult.success) {
-			return message(captionCreationForm, {
-				alertType: 'error',
-				alertText: imageValidationResult.error.errors[0]?.message
-			});
-		}
 
 		if (!captionCreationForm.valid) {
 			return message(captionCreationForm, {
@@ -146,13 +130,15 @@ export const actions: Actions = {
 		}
 
 		try {
+			const imageFile = captionCreationForm.data.image;
+
 			const imageType = imageFile?.type.split('/')[1] as keyof sharp.FormatEnum;
 
-			const imageBuffer = Buffer.from(await imageValidationResult.data.uploadedImage.arrayBuffer());
+			const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
 
 			const base64Image = await compressImage(imageBuffer, imageType);
 
-			const captionContext = captionCreationForm.data.captionContext;
+			const captionContext = captionCreationForm.data.captionPrompt;
 
 			const generatedCaption = await generateImageCaption({
 				imageBase64: base64Image,
