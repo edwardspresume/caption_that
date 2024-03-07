@@ -20,10 +20,7 @@
 </script>
 
 <fieldset class="grid w-full gap-2">
-	<Label for="lengthSelector" class="text-xs sm:text-sm">
-		Length
-		<span class="text-muted-foreground">(optional)</span>
-	</Label>
+	<Label for="lengthSelector" class="text-xs sm:text-sm">Length</Label>
 
 	<Select.Root
 		portal={null}
