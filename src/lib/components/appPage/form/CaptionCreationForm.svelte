@@ -24,20 +24,20 @@
 
 	export let captionCreationForm: SuperValidated<Infer<CaptionFormZodSchemaType>>;
 
-	let previousImage: File;
+	let previousImage: File | null = null;
 
 	const { enhance, form, delayed, message, errors } = superForm(captionCreationForm, {
 		resetForm: false,
 		validators: zodClient(captionFormZodSchema),
 
 		onResult: ({ result }) => {
-			if (result.type === 'success' && $form.image) {
+			if (result.type === 'success' && $form.image && !previousImage) {
 				previousImage = $form.image;
 			}
 		},
 
 		onUpdated: () => {
-			if (previousImage) $form.image = previousImage;
+			if (previousImage && !$form.image) $form.image = previousImage;
 
 			if (!$message) return;
 
